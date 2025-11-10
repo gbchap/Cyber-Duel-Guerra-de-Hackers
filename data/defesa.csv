@@ -1,0 +1,51 @@
+Nome,Tipo,Poder,Custo,Descrição
+Criptografia Quântica,DEFESA,50,5,Protege dados com criptografia resistente a ataques futuros
+Escudo Quântico,DEFESA,50,5,Barreira quântica que anula ataques de alto impacto
+IA de Defesa Adaptativa,DEFESA,50,5,Algoritmo que aprende e bloqueia padrões avançados de ataque
+Fortaleza de Hardware,DEFESA,50,5,Proteção a nível de firmware que previne comprometimento
+Proteção de Núcleo,DEFESA,50,5,Isola e protege subsistemas críticos do sistema
+Firewall Hiperescala,DEFESA,50,5,Filtra tráfego malicioso em grande escala mantendo estabilidade
+Verificação de Integridade Total,DEFESA,50,5,Confere e restaura integridade de todos os arquivos essenciais
+Sistema de Recuperação Instantânea,DEFESA,50,5,Restaura o sistema inteiro para estado seguro em segundos
+Escudo de Dados Corporativo,DEFESA,50,5,Proteção administrativa que bloqueia acesso não autorizado
+Barreira de Contenção,DEFESA,50,5,Cria zonas seguras que isolam áreas comprometidas
+Proxy Inteligente,DEFESA,40,4,Redireciona e inspeciona tráfego suspeito antes de chegar ao alvo
+Autenticação Multifator Avançada,DEFESA,40,4,Exige múltiplas camadas de verificação para operações criticas
+Proteção Anti-DDoS,DEFESA,40,4,Absorve e mitiga grandes surtos de tráfego malicioso
+Sistema de Detecção Comportamental,DEFESA,40,4,Analisa comportamento para bloquear ações anômalas
+Servidor Espelho de Redundância,DEFESA,40,4,Substitui serviços comprometidos mantendo continuidade
+Isolamento por Contêiner,DEFESA,40,4,Executa processos em ambientes isolados para reduzir impacto
+Criptografia AES Avançada,DEFESA,40,4,Camadas fortes de encriptação para dados em trânsito e repouso
+Monitoramento de Pacotes Profundo,DEFESA,40,4,Inspeção profunda que identifica pacotes maliciosos complexos
+Controle de Acesso Dinâmico,DEFESA,40,4,Ajusta privilégios em tempo real conforme risco identificado
+Bloqueio de Comportamento Automatizado,DEFESA,40,4,Bloqueia execuções automáticas consideradas suspeitas
+Proteção de Endpoint,DEFESA,30,3,Defende estações de trabalho e servidores contra malware comum
+Sistema de Backup Incremental,DEFESA,30,3,Salva versões para recuperação rápida sem perda significativa
+Filtragem de Conteúdo,DEFESA,30,3,Remove conteúdo suspeito antes que seja processado pelo sistema
+Roteamento Seguro,DEFESA,30,3,Segmenta rotas de rede para dificultar movimentos laterais
+Análise de Logs Automática,DEFESA,30,3,Identifica padrões em logs e sinaliza potenciais incidentes
+Proteção por Assinatura,DEFESA,30,3,Bloqueia ameaças conhecidas por assinaturas atualizadas
+Segurança em Camadas,DEFESA,30,3,Combina múltiplas proteções para reduzir risco agregado
+Cache Seguro de Sessão,DEFESA,30,3,Armazena sessões de forma isolada para reduzir exposição
+Verificação de Integridade de Memória,DEFESA,30,3,Detecta alterações maliciosas em áreas de memória críticas
+Bloqueio de Payload Suspeito,DEFESA,30,3,Interrompe execuções que contenham cargas maliciosas detectadas
+Sandbox Virtual,DEFESA,20,2,Isola código suspeito para execução segura sem afetar o sistema
+Restauro de Versão,DEFESA,20,2,Restaura componentes para última versão conhecida segura
+Lista Branca de Aplicações,DEFESA,20,2,Permite execução apenas de softwares aprovados
+Proteção de Senhas,DEFESA,20,2,Armazena e valida credenciais com segurança reforçada
+Verificação de Certificados,DEFESA,20,2,Valida certificados e bloqueia conexões inválidas
+Bloqueio de Porta Temporário,DEFESA,20,2,Fecha portas vulneráveis para reduzir superfície de ataque
+Monitor de Integridade de Arquivos,DEFESA,20,2,Sinaliza alterações não autorizadas em arquivos críticos
+Filtro de Entrada de Dados,DEFESA,20,2,Sanitiza entradas para prevenir injeções
+Reforço de Permissões,DEFESA,20,2,Reduz privilégios temporariamente em operações de risco
+Isolamento de Usuário,DEFESA,20,2,Separa ambientes de usuários para evitar contaminação cruzada
+Modo Seguro,DEFESA,10,1,Desativa módulos não essenciais para operação minimizada
+Cache Protegido,DEFESA,10,1,Armazena dados temporários com validações extras
+Bloqueio de Script,DEFESA,10,1,Impede execução automática de scripts desconhecidos
+Quarentena de Arquivo,DEFESA,10,1,Move arquivos suspeitos para área isolada para análise
+Reinício Seguro,DEFESA,10,1,Reinicia serviços críticos em modo seguro
+Validação de Entrada Rápida,DEFESA,10,1,Checagem simples de dados para evitar injeções básicas
+Limitação de Taxa,DEFESA,10,1,Reduz frequência de requisições para evitar abusos
+Proteção de Porta,DEFESA,10,1,Fecha portas não utilizadas automaticamente
+Monitoramento de Processos,DEFESA,10,1,Observa processos em execução e sinaliza anomalias
+Backup Local,DEFESA,10,1,Cria cópia local rápida para pequenas recuperações

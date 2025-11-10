@@ -1,0 +1,51 @@
+Nome,Tipo,Poder,Custo,Descrição
+Exploit Zero-Day,ATAQUE,50,5,Exploração de vulnerabilidade de dia zero
+Ransomware Avançado,ATAQUE,50,5,Criptografa dados críticos do oponente
+Rootkit Oculto,ATAQUE,50,5,Instala backdoor profundo no sistema inimigo
+Ataque Quântico,ATAQUE,50,5,Quebra criptografia com algoritmos quânticos
+Botnet Massiva,ATAQUE,50,5,Milhares de dispositivos zumbificados atacam
+Explosão de Payload,ATAQUE,50,5,Execução coordenada de várias cargas maliciosas
+ZeroLatency Strike,ATAQUE,50,5,Ofensiva instantânea sem possibilidade de reação
+Comprometimento de Firmware,ATAQUE,50,5,Compromete firmware para dano direto ao hardware
+Backdoor Corporativo,ATAQUE,50,5,Insere acesso administrativo persistente de alto nível
+Força Quântica,ATAQUE,50,5,Processamento quântico para ultrapassar defesas
+Worm Autopropagavel,ATAQUE,40,4,Replica rapidamente e contamina módulos vizinhos
+Trojan Persistente,ATAQUE,40,4,Persiste mesmo após tentativas de limpeza
+ManInTheMiddle Avancado,ATAQUE,40,4,Intercepta e altera comunicações em tempo real
+Spectre Exploit,ATAQUE,40,4,Explora microarquitetura de processadores
+ARP Poisoning,ATAQUE,40,4,Envenena tabelas de roteamento na rede inimiga
+Exploit de Drivers,ATAQUE,40,4,Compromete drivers para executar código privilegiado
+Overflow Direcionado,ATAQUE,40,4,Sobrecarga de memória para obter controle do processo
+Payload Encadeado,ATAQUE,40,4,Sequência coordenada de cargas maliciosas
+Trojan de Elevação,ATAQUE,40,4,Eleva privilégios no sistema alvo
+Ataque de Mineração,ATAQUE,40,4,Abusa de recursos para mineração causando degradação
+CrossSite Scripting,ATAQUE,30,3,Injeta scripts maliciosos em páginas confiáveis
+ForcaBruta Paralela,ATAQUE,30,3,Divide processamento para quebrar senhas mais rápido
+Explorador de Porta,ATAQUE,30,3,Varre portas em busca de serviços vulneráveis
+Cryptojacking Local,ATAQUE,30,3,Minera criptomoedas usando CPU do alvo
+SQL Injection Avancado,ATAQUE,30,3,Manipula bancos de dados para corromper registros
+Escalada de Sessao,ATAQUE,30,3,Sequestra sessões autenticadas ativas
+Bot Leve,ATAQUE,30,3,Coordena ataque de pequena botnet para impacto moderado
+Exploracao de API,ATAQUE,30,3,Abusa de endpoints para causar falhas e exfiltração
+Payload Modular,ATAQUE,30,3,Combina módulos para contornar defesas específicas
+Spoofing de Mensagens,ATAQUE,30,3,Falsifica comunicações críticas do sistema
+DNS Spoofing,ATAQUE,20,2,Redireciona tráfego para destinos maliciosos
+Phishing Direcionado,ATAQUE,20,2,Engana usuário para obter credenciais sensíveis
+ARP Flood,ATAQUE,20,2,Satura tabela ARP causando degradação de rede
+Spoofing de Identidade,ATAQUE,20,2,Finge ser entidade confiável para executar ações
+Ataque de Script,ATAQUE,20,2,Executa scripts automatizados com efeitos maliciosos
+Exfiltracao Leve,ATAQUE,20,2,Rouba pequenas quantidades de dados valiosos
+Reconhecimento Ativo,ATAQUE,20,2,Mapeia portas serviços e potenciais vetores de ataque
+Flood de Conexao,ATAQUE,20,2,Gera tráfego para degradar disponibilidade do serviço
+Injecao de Comando,ATAQUE,20,2,Executa comandos remotos simples sobre o alvo
+Engenharia Social,ATAQUE,20,2,Manipula pessoas para obter acesso privilegiado
+Packet Sniffer,ATAQUE,10,1,Captura pacotes para coleta de inteligência de rede
+Keylogger Leve,ATAQUE,10,1,Registra pressionamentos de teclas para obter senhas
+Script Kiddie Tool,ATAQUE,10,1,Ferramenta automatizada de baixo impacto
+Desconfiguracao,ATAQUE,10,1,Causa pequenas falhas de configuração no sistema
+Ping de Teste,ATAQUE,10,1,Verifica latência e responde para sondagem do alvo
+Probe de Servico,ATAQUE,10,1,Detecta serviços ativos para planejamento de ataque
+Tentativa de Login,ATAQUE,10,1,Tenta credenciais comuns para acesso não autorizado
+Trojinho,ATAQUE,10,1,Versão simples de cavalo de troia de baixa complexidade
+Roteamento Malicioso,ATAQUE,10,1,Introduce pequenas alterações nas rotas de rede
+Injetor Basico,ATAQUE,10,1,Insere pacotes maliciosos simples no tráfego

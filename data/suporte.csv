@@ -1,0 +1,48 @@
+Nome,Tipo,Poder,Custo,Efeito,Descrição
+Atualização de Firmware,SUPORTE,0.2,2,AUMENTA_ATAQUE,Melhora o desempenho ofensivo em 20%.
+Overclock de CPU,SUPORTE,0.2,2,AUMENTA_ATAQUE,Aumenta a potência dos ataques em 20%.
+Refatoração de Código,SUPORTE,0.1,1,AUMENTA_ATAQUE,Melhora a eficiência do ataque em 10%.
+IA Estratégica,SUPORTE,0.2,2,AUMENTA_ATAQUE,Usa algoritmos para prever defesas e atacar com 20% mais força.
+Exploração Otimizada,SUPORTE,0.1,1,AUMENTA_ATAQUE,Reduz erros de ataque e melhora impacto em 10%.
+Análise Comportamental,SUPORTE,0.2,2,AUMENTA_ATAQUE,Aprimora decisões ofensivas em 20%.
+Carga Massiva,SUPORTE,0.1,1,AUMENTA_ATAQUE,Aumenta em 10% o dano de ataques múltiplos.
+Ataque Coordenado,SUPORTE,0.2,2,AUMENTA_ATAQUE,Sincroniza ações ofensivas para 20% mais impacto.
+Potencializador de Exploit,SUPORTE,0.2,2,AUMENTA_ATAQUE,Intensifica falhas exploradas em 20%.
+Pacote de Performance,SUPORTE,0.1,1,AUMENTA_ATAQUE,Melhora a execução de ataques em 10%.
+Bloqueio Dinâmico,SUPORTE,0.3,3,DIMINUI_ATAQUE,Reduz o ataque inimigo em 30% no próximo turno.
+Firewall Quântico,SUPORTE,0.3,3,DIMINUI_ATAQUE,Bloqueia 30% do poder ofensivo do oponente.
+Análise de Vulnerabilidades,SUPORTE,0.2,2,DIMINUI_ATAQUE,Reduz o dano do inimigo em 20% ao prever ataques.
+Isolamento de Rede,SUPORTE,0.3,3,DIMINUI_ATAQUE,Impede 30% do dano causado por ataques remotos.
+Filtragem de Pacotes,SUPORTE,0.1,1,DIMINUI_ATAQUE,Filtra 10% das tentativas ofensivas do adversário.
+Controle de Tráfego,SUPORTE,0.2,2,DIMINUI_ATAQUE,Limita o ataque inimigo em 20%.
+Bloqueio de Exploits,SUPORTE,0.3,3,DIMINUI_ATAQUE,Neutraliza 30% dos ataques baseados em falhas.
+Gestão de Ameaças,SUPORTE,0.2,2,DIMINUI_ATAQUE,Reduz o potencial ofensivo do inimigo em 20%.
+Honeypot Avançado,SUPORTE,0.1,1,DIMINUI_ATAQUE,Engana o oponente e reduz seu ataque em 10%.
+Blindagem Digital,SUPORTE,0.3,3,DIMINUI_ATAQUE,Absorve 30% do próximo dano recebido.
+Restauração de Backup,SUPORTE,30,3,AUMENTA_VIDA,Recupera 30 pontos de vida.
+Reinicialização Segura,SUPORTE,20,2,AUMENTA_VIDA,Recupera 20 pontos de vida do sistema.
+Recuperação de Sistema,SUPORTE,15,2,AUMENTA_VIDA,Restaura 15 pontos de vida após falha crítica.
+Recarga de Energia,SUPORTE,10,1,AUMENTA_VIDA,Recupera 10 pontos de vida instantaneamente.
+Reforço de Estrutura,SUPORTE,30,3,AUMENTA_VIDA,Reforça a integridade restaurando 25 pontos de vida.
+Manutenção Automática,SUPORTE,20,2,AUMENTA_VIDA,Executa rotinas de reparo e restaura 20 pontos de vida.
+Cópia de Segurança,SUPORTE,20,2,AUMENTA_VIDA,Recupera 15 pontos de vida de dados perdidos.
+Patch de Estabilidade,SUPORTE,10,1,AUMENTA_VIDA,Melhora a integridade recuperando 10 pontos de vida.
+Sistema de Recuperação Avançado,SUPORTE,30,3,AUMENTA_VIDA,Restaura 30 pontos de vida.
+Reforço de Hardware,SUPORTE,20,2,AUMENTA_VIDA,Recupera 20 pontos de vida fortalecendo o sistema.
+Atualização de Kernel,SUPORTE,0.1,1,AUMENTA_ATAQUE,Melhora o processamento ofensivo em 10%.
+Mitigação de Ataques,SUPORTE,0.2,2,DIMINUI_ATAQUE,Reduz o impacto ofensivo do inimigo em 20%.
+Sincronização Segura,SUPORTE,0.1,1,AUMENTA_ATAQUE,Coordena operações para 10% mais dano.
+Escudo Neural,SUPORTE,0.3,3,DIMINUI_ATAQUE,Reduz 30% do ataque baseado em IA.
+Diagnóstico Defensivo,SUPORTE,0.2,2,DIMINUI_ATAQUE,Prevê e neutraliza 20% do ataque inimigo.
+Análise Heurística,SUPORTE,0.2,2,AUMENTA_ATAQUE,Adapta o ataque e aumenta em 20% o dano.
+Compressão de Dados,SUPORTE,10,1,AUMENTA_VIDA,Recupera 10 pontos de vida ao liberar espaço.
+Replicação Segura,SUPORTE,25,3,AUMENTA_VIDA,Recupera 25 pontos de vida de cópias de sistema.
+Firewall de Próxima Geração,SUPORTE,0.3,3,DIMINUI_ATAQUE,Bloqueia 30% do dano recebido.
+Rede Neural Ofensiva,SUPORTE,0.2,2,AUMENTA_ATAQUE,Aprende e amplifica ataques em 20%.
+Restauração Completa,SUPORTE,30,3,AUMENTA_VIDA,Restaura completamente 30 pontos de vida.
+Proteção de Endpoint,SUPORTE,0.2,2,DIMINUI_ATAQUE,Reduz o poder de ataque do inimigo em 20%.
+Otimizador de Scripts,SUPORTE,0.1,1,AUMENTA_ATAQUE,Melhora ataques em 10%.
+Reset Estratégico,SUPORTE,20,2,AUMENTA_VIDA,Recupera 20 pontos de vida ao reiniciar processos.
+Proteção Ativa,SUPORTE,0.3,3,DIMINUI_ATAQUE,Reduz 30% do ataque inimigo no próximo turno.
+Ataque Inteligente,SUPORTE,0.2,2,AUMENTA_ATAQUE,Melhora o poder ofensivo em 20%.
+Backup de Emergência,SUPORTE,20,2,AUMENTA_VIDA,Restaura 15 pontos de vida após um ataque forte.
