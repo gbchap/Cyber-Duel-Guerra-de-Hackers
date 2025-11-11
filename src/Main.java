@@ -1,25 +1,37 @@
+package src;
+
+import hackers.Jogador;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // carregando as cartas:
 
-        //GerenciadorCartas gerenciador = new GerenciadorCartas();
-        //gerenciador.carregarCartas();
+
+       System.out.println("Bem-vindo, jogador. Digite suas informações.");
         
-        Scanner entrada1 = new Scanner(System.in);
+        Scanner entrada = new Scanner(System.in);
 
-        System.out.print("Bem-vindo, jogador. Digite suas informações.");
-        System.out.print("Digite seu nome: ");
-        String nome1 = entrada1.nextLine(); 
-        System.out.print("Digite seu identificador (número de matrícula): ");
-        String id1 = entrada1.nextLine();
+        Jogador hacker1 = new Jogador();
+        Jogador hacker2;
+        hacker1.coletarInfo(entrada);
+        
+        System.out.print("Seu competidor será um robô (0) ou um humano? (1): ");
+        
+        String robo_humano = entrada.nextLine();
+        while (!robo_humano.equals("0") && !robo_humano.equals("1")){
+            System.out.print("Opção Inválida! Digite Opção Válida: ");
+            robo_humano = entrada.nextLine();
+        }
 
-        entrada1.close();
+        if (robo_humano.equals("0")){
+            hacker2 = new Jogador("BOT", "202565001");
+        }
+        else{
+            hacker2 = new Jogador();
+            hacker2.coletarInfo(entrada);
+        }
 
-        Scanner verificacao = new Scanner(System.in);
-        System.out.println("Seu competidor será um robô (0) ou um humano? (1): ");
-        String roboHumano = verificacao.nextLine();
-
+        entrada.close(); 
     }
 }
