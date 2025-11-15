@@ -1,4 +1,4 @@
-package src;
+package src.pannel;
 
 import hackers.Jogador;
 import java.util.Scanner;
