@@ -48,13 +48,12 @@ public class GerenciadorCartas {
             while ((linha = br.readLine()) != null) {
                 String[] c = linha.split(",");
 
-                CartaSup carta = new CartaSup(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), c[3]);
+                CartaSup carta = new CartaSup(c[0], Double.parseDouble(c[2]), Integer.parseInt(c[3]), c[4], c[5]);
                 cartas.put(carta.getNome(), carta);
             }
         } catch (Exception e) {}
     }
 
-    
     public CartaP getCarta(String nome) {
         return cartas.get(nome);
     }    

@@ -35,3 +35,7 @@ public class Main {
         entrada.close(); 
     }
 }
+
+//public CartaP getCarta(String nome) {
+//    return cartas.get(nome);
+//}
