@@ -20,8 +20,8 @@ public class GerenciadorCartas {
             while ((linha = br.readLine()) != null) {
                 String[] c = linha.split(",");
 
-                CartaP carta = new CartaP(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), "ataque");
-                cartas.put(carta.getNome(), carta);
+                CartaP carta = new CartaP(c[0], "ATAQUE",  Double.parseDouble(c[2]), Integer.parseInt(c[3]), c[4]);
+                cartas.put(carta.getCarta(), carta);
             }
         } catch (Exception e) {}
     }
@@ -34,8 +34,8 @@ public class GerenciadorCartas {
             while ((linha = br.readLine()) != null) {
                 String[] c = linha.split(",");
 
-                CartaP carta = new CartaP(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), "defesa");
-                cartas.put(carta.getNome(), carta);
+                CartaP carta = new CartaP(c[0], "DEFESA",  Double.parseDouble(c[2]), Integer.parseInt(c[3]), c[4]);
+                cartas.put(carta.getCarta(), carta);
             }
         } catch (Exception e) {}
     }
@@ -48,8 +48,8 @@ public class GerenciadorCartas {
             while ((linha = br.readLine()) != null) {
                 String[] c = linha.split(",");
 
-                CartaSup carta = new CartaSup(c[0], Integer.parseInt(c[2]), Integer.parseInt(c[3]), c[4], c[5]);
-                cartas.put(carta.getNome(), carta);
+                CartaSup carta = new CartaSup(c[0], "SUPORTE", Double.parseDouble(c[2]), Integer.parseInt(c[3]), c[4], c[5]);
+                cartas.put(carta.getCarta(), carta);
             }
         } catch (Exception e) {}
     }

@@ -1,5 +1,6 @@
 package src.pannel;
-
+import src.data.CartaP;
+import src.pannel.GerenciadorCartas;
 import hackers.Jogador;
 import java.util.Scanner;
 
@@ -8,7 +9,14 @@ public class Main {
         // carregando as cartas:
 
 
-       System.out.println("Bem-vindo, jogador. Digite suas informações.");
+        GerenciadorCartas gc = new GerenciadorCartas();
+
+        public CartaP getCarta(String nome){
+            
+            return cartas.get(nome);
+        }
+
+        System.out.println("Bem-vindo, jogador. Digite suas informações.");
         
         Scanner entrada = new Scanner(System.in);
 
@@ -35,7 +43,3 @@ public class Main {
         entrada.close(); 
     }
 }
-
-//public CartaP getCarta(String nome) {
-//    return cartas.get(nome);
-//}

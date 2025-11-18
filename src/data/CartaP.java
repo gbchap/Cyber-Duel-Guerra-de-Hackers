@@ -3,11 +3,11 @@ package src.data;
 public class CartaP{
     private String nome;
     private String tipo;
-    private int poder;
+    private double poder;
     private int custo;
     private String descricao;
 
-    public CartaP(String nome, String tipo, int poder, int custo, String descricao){
+    public CartaP(String nome, String tipo, double poder, int custo, String descricao){
         this.nome = nome;
         this.tipo = tipo;
         this.poder = poder;
