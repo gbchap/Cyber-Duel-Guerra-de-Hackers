@@ -1,0 +1,7 @@
+- Mostrar lista de cartas após ter os dados dos jogadores
+- Mandar ele escolher 4 cartas de ataque, 4 de defesa e 2 de suporte;
+- Seleção aleatoria (a do bot);
+- O sistema também deverá oferecer uma opção de seleção aleatória
+do deck mas que obedeça às regras de quantidade de cartas de ataque,
+defesa e suporte. O bot sempre utilizará essa opção (Random.java)
+- 

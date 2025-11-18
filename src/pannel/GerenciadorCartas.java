@@ -43,7 +43,7 @@ public class GerenciadorCartas {
     private void carregarSuporte(String caminho) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
             br.readLine();
-            String linha;
+            String linha;   
 
             while ((linha = br.readLine()) != null) {
                 String[] c = linha.split(",");
