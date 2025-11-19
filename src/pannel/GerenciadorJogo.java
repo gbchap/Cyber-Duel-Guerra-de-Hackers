@@ -16,6 +16,38 @@ public class GerenciadorJogo {
         this.hacker1 = hacker2;
     }
 
+    // Método GERAL SELECIONAR -> usando sobrecarga tb
+    public void selecionar(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
+    ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){
+        selecionar(hacker1, conjunto1, conjunto2, conjunto3, qtdAtqDef, qtdSup, entrada);
+        selecionar(hacker2, conjunto1, conjunto2, conjunto3, qtdAtqDef, qtdSup, entrada);
+    }
+
+    // Método SELECIONAR 
+    public void selecionar(Jogador hacker, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
+    ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){
+        if (hacker.getNome().equals("BOT")){
+            selecaoAleatoria(hacker, conjunto1, conjunto2, conjunto3, qtdAtqDef, qtdSup); // escolha aleatória BOT
+        }
+        else{
+            System.out.println("\n" + hacker.getNome() + ", selecione suas cartas!");
+            System.out.print("Selecionar cartas (1)  Seleção Aleatória (2): ");  // Perguntando sobre escolha de selecao de cartas
+            String selecao = entrada.nextLine();
+
+            while (!selecao.equals("1") && !selecao.equals("2")){     // Verificacao de escolha válida pelo usuário
+                System.out.print("Opção Inválida! Digite Opção Válida: ");
+                selecao = entrada.nextLine();
+            }
+            if (selecao.equals("1")){ //selecionar na mao
+                selecionarCartas(hacker, conjunto1, conjunto2, conjunto3, qtdAtqDef, qtdSup, entrada); // Jogador 1
+            }
+            else{   // Se a opcao for aleatorio
+                selecaoAleatoria(hacker, conjunto1, conjunto2, conjunto3, qtdAtqDef, qtdSup);   // escolha aleatoria jogador 1
+            }
+        }
+
+    }
+
     // Método Selecionar Cartas
     public void selecionarCartas(Jogador hacker, ArrayList<CartaP> conjunto, int qtdCartas, Scanner entrada){
         System.out.println("\n" + "Escolha " + qtdCartas + " cartas de " + conjunto.get(0).getTipo() + " da lista!" + "\n");
@@ -79,7 +111,7 @@ public class GerenciadorJogo {
                 System.out.println("Carta Escolhida!");
                 hacker.adicionaNoDeck(conjunto, numeroDaCarta); 
             }
-        }
+        } 
     }
 
     //Método geral Selecionador
@@ -88,6 +120,7 @@ public class GerenciadorJogo {
         selecionarCartas(hacker, conjunto1, qtdAtqDef, entrada); // ataque
         selecionarCartas(hacker, conjunto2, qtdAtqDef, entrada); // defesa
         selecionarCartas(hacker, conjunto3, qtdSup, entrada); // suporte
+        hacker.imprimirCartasDeck(); // mostrar cartas escolhidas
         
     }
 
@@ -106,9 +139,11 @@ public class GerenciadorJogo {
     // Método Geral Selecao Aleatoria
     public void selecaoAleatoria(Jogador hacker, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
     ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup){
+        System.out.println("\nSelecionando cartas Jogador " + hacker.getNome() + " aleatoriamente...");
         selecaoAleatoria(hacker, conjunto1, qtdAtqDef); // ataque
         selecaoAleatoria(hacker, conjunto2, qtdAtqDef); // defesa
         selecaoAleatoria(hacker, conjunto3, qtdSup); // suporte
+        hacker.imprimirCartasDeck();
     }
 
 }

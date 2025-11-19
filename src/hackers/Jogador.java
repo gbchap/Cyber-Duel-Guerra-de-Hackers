@@ -40,7 +40,8 @@ public class Jogador{
     public void imprimirCartasDeck(){ // imprime as cartas armazenadas no deck
         System.out.println("\nCartas no Deck: ");
         for (int i = 0; i < deck.size(); i++){
-            System.out.println("\nCarta " + (i+1) + ": " + deck.get(i).getNome() + " " + deck.get(i).getTipo());
+            System.out.println("\nCarta " + (i+1) + ": ");
+            deck.get(i).imprime();
         }
     }
 }
