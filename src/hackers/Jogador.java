@@ -34,6 +34,10 @@ public class Jogador{
         return nome;
     }
 
+    public String getMatricula(){
+        return matricula;
+    }
+
     public int getEnergia(){
         return pontosDeEnergia;
     }
@@ -83,7 +87,8 @@ public class Jogador{
     }
 
     public void imprimeCartaDeckManipulavel(int i){
-        System.out.println("\n" + deckManipulavel.get(i).imprime());
+        System.out.println("\n");
+        deckManipulavel.get(i).imprime();
     }
 
     public int custoCartaDeckManipulavel(int i){
@@ -99,7 +104,25 @@ public class Jogador{
         }
     }
 
-    public void deletaCartasDeckManipulavel(int[] indices){
+    public void deletaCartasDeckManipulavel(ArrayList<Integer> armazena){
         //os indices mudam, então pensar numa funcao para isso
+        for (int i = 0; i < armazena.size(); i++){
+            deckManipulavel.remove(armazena.get(i));
+            for (int j = i+1; j< armazena.size(); j++){
+                if (armazena.get(j) > armazena.get(i)){
+                    armazena.set(j, armazena.get(i) - 1);
+                }
+            }
+        }
+
+    }
+
+    public boolean deckManipulavelEhVazio(){
+        if (deckManipulavel.size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

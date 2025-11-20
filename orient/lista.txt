@@ -2,21 +2,31 @@
 
 -------Breno----- (o meu ta detalhado pra eu lembrar oq eu nao terminei especifico dos turnos)
 -Implementar método pro turno completo de cada jogador (usar sobrecarga) que chama a verificacao de 
-desistencia, as opcoes e a selecao
+desistencia, as opcoes e a selecao FEITO! (n precisou de sobrecarga)
 
--Mudar os vetores de armazenar os indices das cartas do deck manipulavel para ArrayList
+-Mudar os vetores de armazenar os indices das cartas do deck manipulavel para ArrayList FEITO!
 
--Fazer funcao de deletar as cartas no deck manipulavel pq assim q eu deleto uma, os indices mudam 
+-Fazer funcao de deletar as cartas no deck manipulavel pq assim q eu deleto uma, os indices mudam FEITO!
 
--Imprimir mensagens de vitoria
+-Imprimir mensagens de vitoria FEITO!
 
--Depois de ajeitar tudo isso, arrumar o turnoPVP geral para que os turnos entre os jogadores sejam alternados, isso pelo indice do turno (impar o 1 comeca e par o 2 comeca)
+-Depois de ajeitar tudo isso, arrumar o turnoPVP geral para que os turnos entre os jogadores sejam alternados, 
+isso pelo indice do turno (impar o 1 comeca e par o 2 comeca) FEITO!
 
--Arrumar os parametros, mudar na main e testar
+-Arrumar os parametros, mudar na main e testar FEITO!
 
 -Pensar em como ajeitar os pontos de ataque, defesa e suporte // precisarei de ajuda
 
--deixar o esqueleto pronto para o funcionamento do bot
+-deixar o esqueleto pronto para o funcionamento do bot 
+
+-criar um outro arquivo java AcoesJogo.java pra colocar acoes do jogo la, no pacote hackers, usando protected no deck manipulavel pra ficar bem mais fácil
+
+-colocar matricula como parte do identificador do usuário "Nome(matricula)" FEITO!
+
+
+-Verificar Selecao Aleatoria, pq existe a chance de escolher o mesmo numero
+
+-Verificar mensagem de vitoria, pq esta dando algum erro
 
 --------Gabi-----
 

@@ -56,7 +56,7 @@ public class Main {
             hacker2.coletarInfo(entrada);
             GerenciadorJogo gerenciador = new GerenciadorJogo(hacker1, hacker2);
 
-            gerenciador.selecionar(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
+            gerenciador.turnosPVP(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
         }
 
 
