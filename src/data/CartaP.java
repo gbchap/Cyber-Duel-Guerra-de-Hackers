@@ -25,6 +25,10 @@ public class CartaP{
         return nome;
     }
 
+    public int getCusto(){
+        return custo;
+    }
+
     public void imprime(){
         if (this.tipo.equals("SUPORTE")){
             System.out.println("Nome: " + nome + ", Tipo: " + tipo + ", Poder: " + poder +

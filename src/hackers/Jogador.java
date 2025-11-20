@@ -9,10 +9,11 @@ public class Jogador{
     private String nome;
     private String matricula;
     private double pontosDeVida = 100;
-    private double pontosDeEnergia = 10;
+    private int pontosDeEnergia = 10;
     private double qtdAtaque = 0;
     private double qtdDefesa = 0;
     private ArrayList<CartaP> deck = new ArrayList<>();
+    private ArrayList<CartaP> deckManipulavel = new ArrayList<>();
 
     public Jogador(){}
 
@@ -33,15 +34,72 @@ public class Jogador{
         return nome;
     }
 
+    public int getEnergia(){
+        return pontosDeEnergia;
+    }
+
     public void adicionaNoDeck(ArrayList<CartaP> conjunto, int index){ //adicionar carta no deck
         deck.add(conjunto.get(index - 1));
     }
 
     public void imprimirCartasDeck(){ // imprime as cartas armazenadas no deck
         System.out.println("\nCartas no Deck: ");
-        for (int i = 0; i < deck.size(); i++){
+        for (int i = 0; i < deckManipulavel.size(); i++){
             System.out.println("\nCarta " + (i+1) + ": ");
-            deck.get(i).imprime();
+            deckManipulavel.get(i).imprime();
         }
+    }
+
+    public void aumentaEnergia(){ // energia ganha ao fim dos turnos
+        if (pontosDeEnergia < 10){
+            pontosDeEnergia++;
+        }
+    }
+
+    public void diminuiEnergia(int qtd){
+        pontosDeEnergia -= qtd;
+    }
+
+    public void ajustaVida(){ // verifica ao final do turno se a vida, que passou dos 100 pontos, ainda continua acima
+        if (pontosDeVida > 100){
+            pontosDeVida = 100;
+        }
+    }
+
+    public double getVida(){ // retorna a vida
+        return pontosDeEnergia;
+    }
+
+    public void preencherDeckManipulavel(){
+        deckManipulavel = deck;
+    }
+
+    public int deckManipulavelsize(){
+        return deckManipulavel.size();
+    }
+
+    public String acessaNomeCartasDeckManipulavel(int i){
+        return deckManipulavel.get(i).getNome();
+    }
+
+    public void imprimeCartaDeckManipulavel(int i){
+        System.out.println("\n" + deckManipulavel.get(i).imprime());
+    }
+
+    public int custoCartaDeckManipulavel(int i){
+        return deckManipulavel.get(i).getCusto();
+    }
+
+    public void diminuiVida(int pontosDano){
+        if (pontosDano <= pontosDeVida){
+            pontosDeVida -= pontosDano;
+        }
+        else{
+            pontosDeVida = 0;
+        }
+    }
+
+    public void deletaCartasDeckManipulavel(int[] indices){
+        //os indices mudam, então pensar numa funcao para isso
     }
 }
