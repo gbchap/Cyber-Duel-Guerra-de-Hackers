@@ -71,7 +71,7 @@ public class Jogador{
     }
 
     public double getVida(){ // retorna a vida
-        return pontosDeEnergia;
+        return pontosDeVida;
     }
 
     public void preencherDeckManipulavel(){
@@ -86,22 +86,17 @@ public class Jogador{
         return deckManipulavel.get(i).getNome();
     }
 
-    public void imprimeCartaDeckManipulavel(int i){
-        System.out.println("\n");
-        deckManipulavel.get(i).imprime();
-    }
+    // public void imprimeCartaDeckManipulavel(int i){
+    //     System.out.println("\n");
+    //     deckManipulavel.get(i).imprime();
+    // }
 
     public int custoCartaDeckManipulavel(int i){
         return deckManipulavel.get(i).getCusto();
     }
 
-    public void diminuiVida(int pontosDano){
-        if (pontosDano <= pontosDeVida){
-            pontosDeVida -= pontosDano;
-        }
-        else{
-            pontosDeVida = 0;
-        }
+    public void zeraVida(){
+        pontosDeVida = 0;
     }
 
     public void deletaCartasDeckManipulavel(ArrayList<Integer> armazena){

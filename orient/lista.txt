@@ -19,14 +19,27 @@ isso pelo indice do turno (impar o 1 comeca e par o 2 comeca) FEITO!
 
 -deixar o esqueleto pronto para o funcionamento do bot 
 
--criar um outro arquivo java AcoesJogo.java pra colocar acoes do jogo la, no pacote hackers, usando protected no deck manipulavel pra ficar bem mais fácil
+-criar um outro arquivo java AcoesJogo.java pra colocar acoes do jogo la, no pacote hackers, 
+usando protected no deck manipulavel pra ficar bem mais fácil
 
 -colocar matricula como parte do identificador do usuário "Nome(matricula)" FEITO!
 
 
 -Verificar Selecao Aleatoria, pq existe a chance de escolher o mesmo numero
 
--Verificar mensagem de vitoria, pq esta dando algum erro
+-Verificar mensagem de vitoria, pq esta dando algum erro FEITO!
+
+
+-Ajustar espacamento na confirmacao da carta de mao jogada FEITO!
+
+-Ajustar selecao por indice, pq esqueci do -1, pq no vetor comeca no 0 e nao no 1 FEITO!
+
+-Colocar confirmacao na selecao de opcao Jogar, Passar ou Desistir FEITO!
+
+-Quando o jogador escolhe uma mao e desiste, o deck antigo nao esvazia. Verificar!
+-Não está deletando deck manipulavel
+-Ajeitar espacamento nas impressoes da mao escolhida!
+-Fazer o painel funcionar!
 
 --------Gabi-----
 

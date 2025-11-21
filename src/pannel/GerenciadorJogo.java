@@ -20,14 +20,35 @@ public class GerenciadorJogo {
     public int verificaDesistencia(Jogador hacker, Scanner entrada){
         System.out.println("\nSua vez, " + hacker.getNome() + "(" + hacker.getMatricula() + ")!");
         System.out.println("\nVida: " + hacker.getVida() + " Energia: " + hacker.getEnergia());
-        System.out.print("\nJogar(0) Passar a vez(1) Desistir(2): ");
+        String selecaoOpcao;
 
-        String selecaoOpcao = entrada.nextLine();
-
-        while (!selecaoOpcao.equals("0") && !selecaoOpcao.equals("1") && !selecaoOpcao.equals("2")){     // Verificacao de escolha válida pelo usuário
-            System.out.print("Opção Inválida! Digite Opção Válida: ");
+        while(true){
+            System.out.print("\nJogar(0) Passar a vez(1) Desistir(2): ");
             selecaoOpcao = entrada.nextLine();
+
+            while (!selecaoOpcao.equals("0") && !selecaoOpcao.equals("1") && !selecaoOpcao.equals("2")){     // Verificacao de escolha válida pelo usuário
+                System.out.print("Opção Inválida! Digite Opção Válida: ");
+                selecaoOpcao = entrada.nextLine();
+            }
+
+            //Confirmacao da desistencia
+            System.out.print("\nConfirma opção? (Y/N) "); 
+            String confirmaOpcao = entrada.nextLine();
+            
+            while(!confirmaOpcao.toLowerCase().equals("n") && !confirmaOpcao.toLowerCase().equals("y")){ //verificacao de escolha de opcao CONFIRMA correta
+                System.out.print("Opção Inválida! Escolha uma opção válida: ");
+                confirmaOpcao = entrada.nextLine();
+            }
+            
+            if (confirmaOpcao.toLowerCase().equals("n")){
+                System.out.println("Escolha sua opção novamente");
+            }
+            else{
+                break; 
+            }
+
         }
+
 
         if (selecaoOpcao.equals("2")){
             return 2;
@@ -195,7 +216,7 @@ public class GerenciadorJogo {
             if (opcaoJogarPassarDesistir == 2){
                 // se desistir, coloca a vida em zero
                 System.out.println("\n" + hacker.getNome() + "(" + hacker.getMatricula() + ") desistiu!");
-                hacker.diminuiVida(100);
+                hacker.zeraVida();
             }
             else if (opcaoJogarPassarDesistir == 1){
                 // se passar, imprime mensagem
@@ -225,10 +246,11 @@ public class GerenciadorJogo {
             selecionarCartasManipulavel(hacker, armazena, qtdCartasDeck, entrada);
             // confirmar a mao jogada, mostrando as cartas selecionadas juntas
             System.out.println("\nSua mão escolhida: ");
-            for (int i = 0; i < armazena.size(); i++){
-                hacker.imprimeCartaDeckManipulavel(armazena.get(i));
-            }
-            System.out.println("\nConfirma Seleção? (Y/N) ");
+            hacker.imprimirCartasDeck();
+            // for (int i = 0; i < armazena.size(); i++){
+            //     hacker.imprimeCartaDeckManipulavel(armazena.get(i));
+            // }
+            System.out.print("\nConfirma Seleção? (Y/N) ");
 
             String confirmaMao = entrada.nextLine();
             
@@ -452,12 +474,12 @@ public class GerenciadorJogo {
             }
             else{
                 System.out.println("Carta Escolhida!");
-                armazena.add(numeroDaCarta);
+                armazena.add(numeroDaCarta-1);
                 if (armazena.size() == qtdCartasDeck){ // verifica se o vetor de cartas selecionadas está cheio
                     System.out.println("Todas as cartas do seu deck foram selecionadas!");
                 }
                 else{
-                    System.out.println("Deseja escolher mais cartas? (Y/N) "); // caso o jogador escolha mais cartas
+                    System.out.print("\nDeseja escolher mais cartas? (Y/N) "); // caso o jogador escolha mais cartas
                     String confirmaMaisCartas = entrada.nextLine();
             
                     while(!confirmaMaisCartas.toLowerCase().equals("n") && !confirmaMaisCartas.toLowerCase().equals("y")){ //verificacao de escolha de opcao CONFIRMA correta
