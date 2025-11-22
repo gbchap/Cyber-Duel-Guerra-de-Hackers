@@ -190,9 +190,19 @@ public class GerenciadorJogo {
     public void turnosPVP(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
         ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){ 
 
+        Replay replay = new Replay();
         // selecionar cartas ambos os jogadores
         selecionar(hacker1, hacker2, conjunto1, conjunto2, conjunto3, qtdAtqDef, qtdSup, entrada);
 
+        replay.add("=== DECK INICIAL DO JOGADOR 1 ===");
+        for (CartaP c : hacker1.getDeck()) {
+            replay.add(c.getNome() + " | Tipo: " + c.getTipo() + " | Poder: " + c.getPoder());
+        }
+
+        replay.add("\n=== DECK INICIAL DO JOGADOR 2 ===");
+        for (CartaP c : hacker2.getDeck()) {
+            replay.add(c.getNome() + " | Tipo: " + c.getTipo() + " | Poder: " + c.getPoder());
+        }
 
         System.out.println("\nComeçando o jogo...");
         int contadorTurnos = 1; // contar os turnos
@@ -210,6 +220,11 @@ public class GerenciadorJogo {
         while (hacker1.getVida() != 0 && hacker2.getVida() != 0){
             ArrayList<Integer> armazenaJogador1 = new ArrayList<>(); // vetor que armazena selecao das cartas da mao jogada JOGADOR 1
             ArrayList<Integer> armazenaJogador2 = new ArrayList<>(); // vetor que armazena selecao das cartas da mao jogada JOGADOR 2
+
+            replay.add("\n======================================");
+            replay.add("TURNO " + contadorTurnos);
+            replay.add("Vida P1: " + hacker1.getVida() + " | Energia P1: " + hacker1.getEnergia());
+            replay.add("Vida P2: " + hacker2.getVida() + " | Energia P2: " + hacker2.getEnergia());
             
             // Mensagem Turno 
             System.out.println("\noooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"); // separador turnos
@@ -275,6 +290,28 @@ public class GerenciadorJogo {
             System.out.println("\nPainel do Turno " + contadorTurnos + ":" + "\n=================================================================="); // separador painel
             System.out.println("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") jogou:");
             // imprimir mao jogada; se o jogador tiver passado a vez verificar tam do vetor == 0, e imprime "passou a vez"
+                        // JOGADOR 1
+            if (armazenaJogador1.size() == 0) {
+                replay.add(hacker1.getNome() + " passou a vez.");
+            } else {
+                replay.add(hacker1.getNome() + " jogou:");
+                for (int idx : armazenaJogador1) {
+                    CartaP carta = hacker1.getDeckManipulavel().get(idx);
+                    replay.add(" - " + carta.getNome() + " (" + carta.getTipo() + ")");
+                }
+            }
+
+            // JOGADOR 2
+            if (armazenaJogador2.size() == 0) {
+                replay.add(hacker2.getNome() + " passou a vez.");
+            } else {
+                replay.add(hacker2.getNome() + " jogou:");
+                for (int idx : armazenaJogador2) {
+                    CartaP carta = hacker2.getDeckManipulavel().get(idx);
+                    replay.add(" - " + carta.getNome() + " (" + carta.getTipo() + ")");
+                }
+            }
+
             if (armazenaJogador1.size() == 0){
                 System.out.println("Passou a vez!\n");
             }
@@ -299,6 +336,11 @@ public class GerenciadorJogo {
 
             // IMPLEMENTAR PONTOS DE ATAQUE, DEFESA E SUPORTE
             consolidaTurno(hacker1, hacker2, armazenaJogador1, armazenaJogador2);
+
+            replay.add("Após consolidação:");
+            replay.add("Vida P1: " + hacker1.getVida() + " | Energia P1: " + hacker1.getEnergia());
+            replay.add("Vida P2: " + hacker2.getVida() + " | Energia P2: " + hacker2.getEnergia());
+
 
             // mostrar pontos de vida e energia 
             System.out.println("\nDados " + hacker1.getNome() + "(" + hacker1.getMatricula() + "):\n" + "Vida: " + hacker1.getVida() + " Energia: " + hacker1.getEnergia());
@@ -328,17 +370,30 @@ public class GerenciadorJogo {
         if (hacker1.getVida() == 0 && hacker2.getVida() != 0){
             // imprimir hacker2 ganhou
             System.out.println("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") VENCEU!");
+            replay.add("VENCEDOR: " + hacker2.getNome());
+
         }
         else if (hacker1.getVida() != 0 && hacker2.getVida() == 0){
             // imprimir hacker1 ganhou
             System.out.println("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") VENCEU!");
+            replay.add("VENCEDOR: " + hacker1.getNome());
+
         }
         else{
             // imprimir empate
             System.out.println("\nOs jogadores EMPATARAM!");
+            replay.add("O jogo terminou EMPATADO.");
+
         }
 
         // OPCAO REPLAY ENTRA AQUI!!!!!
+        System.out.print("\nDeseja salvar o replay? (s/n): ");
+        String respReplay = entrada.nextLine();
+
+        if (respReplay.equalsIgnoreCase("s")) {
+            replay.salvar("replay.txt");
+        }
+
     }
 
 

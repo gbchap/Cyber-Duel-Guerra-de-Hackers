@@ -54,6 +54,15 @@ public class Jogador{
         }
     }
 
+    public ArrayList<CartaP> getDeck() {
+    return deck;
+    }
+
+    public ArrayList<CartaP> getDeckManipulavel() {
+        return deckManipulavel;
+    }
+
+
     public void aumentaEnergia(){ // energia ganha ao fim dos turnos
         if (pontosDeEnergia < 10){
             pontosDeEnergia++;
