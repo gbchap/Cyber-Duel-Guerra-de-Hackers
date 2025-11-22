@@ -8,45 +8,170 @@ import hackers.Jogador;
 import java.util.Scanner;
 
 public class GerenciadorJogo {
-    Jogador j1;
-    Jogador j2;
 
-    GerenciadorJogo(Jogador j1, Jogador j2){
-        this.j1 = j1;
-        this.j2 = j2;
+    GerenciadorJogo(){}
+
+    // Método Turnos PLAYER x BOT
+    public void turnoBOT(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
+    ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){
+        // IMPLEMENTAR
+    }
+
+    // Método faz a atualizacao dos pontos de defesa e ataque do jogador, analisando o suporte
+    public double atualizacaoPontos (Jogador hacker, ArrayList<Integer> armazena, double diminuicaoAtaque, double aumentoMaiorAtaque,
+    double calculoIntermediarioAtaque, double maiorPoderAtaque){
+        // verificar as cartas de ataque
+        for (int i = 0; i < armazena.size(); i++){
+            if (hacker.tipoCartaDeckManipulavel(armazena.get(i)).equals("ATAQUE")){
+                if (hacker.poderCartaDeckManipulavel(armazena.get(i)) > maiorPoderAtaque){
+                    maiorPoderAtaque = hacker.poderCartaDeckManipulavel(armazena.get(i));
+                    calculoIntermediarioAtaque = maiorPoderAtaque;
+                }
+            }
+        }
+
+        // passar verificando os tipos de suporte
+        for (int i = 0; i < armazena.size(); i++){
+
+            if (hacker.tipoCartaDeckManipulavel(armazena.get(i)).equals("SUPORTE")){
+                // se for aumenta ataque 
+                if (hacker.efeitoCartaDeckManipulavel(armazena.get(i)).equals("AUMENTA_ATAQUE")){
+                    // salvar o maior ataque, calculando o aumento
+                    calculoIntermediarioAtaque *= (1.0 + hacker.poderCartaDeckManipulavel(armazena.get(i)));
+
+                }
+                else if (hacker.efeitoCartaDeckManipulavel(armazena.get(i)).equals("AUMENTA_VIDA")){ // se for aumenta vida
+                    // aumenta a vida
+                    hacker.aumentaVida(hacker.poderCartaDeckManipulavel(armazena.get(i)));
+                }
+                else {  // se for diminuir ataque 
+                    diminuicaoAtaque *= (1.0 - hacker.poderCartaDeckManipulavel(armazena.get(i)));
+                    // salva a info pra depois que consolidar todos os pontos do outro jogador
+                }   
+            }
+        }
+        // calculando o aumento do maior ataque
+        aumentoMaiorAtaque = calculoIntermediarioAtaque - maiorPoderAtaque;
+        
+        // somar todas as cartas de ataque + dano extra calculado (inicializar com 0)
+        for (int i = 0; i < armazena.size(); i++){
+            if (hacker.tipoCartaDeckManipulavel(armazena.get(i)).equals("ATAQUE")){
+                hacker.aumentaAtaque(hacker.poderCartaDeckManipulavel(armazena.get(i)));
+            }
+        }
+        hacker.aumentaAtaque(aumentoMaiorAtaque);
+
+        // somar as cartas de defesa
+        for (int i = 0; i < armazena.size(); i++){
+            if (hacker.tipoCartaDeckManipulavel(armazena.get(i)).equals("DEFESA")){
+                hacker.aumentaDefesa(hacker.poderCartaDeckManipulavel(armazena.get(i))); 
+            }
+        }
+
+        return diminuicaoAtaque; // retorna porque preciso usar depois e assim como em C++ o valor alterado dentro da funcao não vai pra fora
+    }
+
+
+    // Método que faz a consolidacao do turno
+    public void consolidaTurno (Jogador hacker1, Jogador hacker2, ArrayList<Integer> armazenaJogador1, ArrayList<Integer> armazenaJogador2){
+        double diminuicaoAtaque1 = 1.0; // usar decimal
+        double diminuicaoAtaque2 = 1.0;
+        double aumentoMaiorAtaque1 = 0;
+        double aumentoMaiorAtaque2 = 0;
+        double calculoIntermediarioAtaque1 = 0;
+        double calculoIntermediarioAtaque2 = 0;
+        double maiorPoderAtaque1 = 0;
+        double maiorPoderAtaque2 = 0;
+
+        diminuicaoAtaque1 = atualizacaoPontos(hacker1, armazenaJogador1, diminuicaoAtaque1, aumentoMaiorAtaque1, calculoIntermediarioAtaque1, maiorPoderAtaque1);
+        diminuicaoAtaque2 = atualizacaoPontos(hacker2, armazenaJogador2, diminuicaoAtaque2, aumentoMaiorAtaque2, calculoIntermediarioAtaque2, maiorPoderAtaque2);
+
+        // aplicar o diminuir ataque 
+        hacker1.diminuiAtaque(diminuicaoAtaque2);
+        hacker2.diminuiAtaque(diminuicaoAtaque1);
+
+        // fazer o ataque menos defesa + verificar vida + arredondar vida
+        hacker1.atualizaVida(hacker2.getAtaque() - hacker1.getDefesa());
+        hacker1.ajustaVida();
+        hacker1.arredondaVida();
+        hacker2.atualizaVida(hacker1.getAtaque() - hacker2.getDefesa());
+        hacker2.ajustaVida();
+        hacker2.arredondaVida();
+
+    }
+
+
+    // Verificador de Desistencia/passar vez caso o jogador nao tenha energia
+    public boolean verificaEnergiaParaJogo(Jogador hacker){
+        boolean temEnergia = false;
+        for (int i = 0; i < hacker.deckManipulavelsize(); i++){
+            if (hacker.custoCartaDeckManipulavel(i) <= hacker.getEnergia()){
+                temEnergia = true;
+            }
+        }
+
+        return temEnergia;
     }
 
     // Verificador de Desistencia
     public int verificaDesistencia(Jogador hacker, Scanner entrada){
-        System.out.println("\nSua vez, " + hacker.getNome() + "(" + hacker.getMatricula() + ")!");
         System.out.println("\nVida: " + hacker.getVida() + " Energia: " + hacker.getEnergia());
         String selecaoOpcao;
 
-        while(true){
-            System.out.print("\nJogar(0) Passar a vez(1) Desistir(2): ");
-            selecaoOpcao = entrada.nextLine();
-
-            while (!selecaoOpcao.equals("0") && !selecaoOpcao.equals("1") && !selecaoOpcao.equals("2")){     // Verificacao de escolha válida pelo usuário
-                System.out.print("Opção Inválida! Digite Opção Válida: ");
+        if (verificaEnergiaParaJogo(hacker) == false){
+            while(true){
+                System.out.print("\nVocê não tem energia para jogar cartas! Passar a vez(1) Desistir(2): ");
                 selecaoOpcao = entrada.nextLine();
-            }
 
-            //Confirmacao da desistencia
-            System.out.print("\nConfirma opção? (Y/N) "); 
-            String confirmaOpcao = entrada.nextLine();
-            
-            while(!confirmaOpcao.toLowerCase().equals("n") && !confirmaOpcao.toLowerCase().equals("y")){ //verificacao de escolha de opcao CONFIRMA correta
-                System.out.print("Opção Inválida! Escolha uma opção válida: ");
-                confirmaOpcao = entrada.nextLine();
-            }
-            
-            if (confirmaOpcao.toLowerCase().equals("n")){
-                System.out.println("Escolha sua opção novamente");
-            }
-            else{
-                break; 
-            }
+                while (!selecaoOpcao.equals("1") && !selecaoOpcao.equals("2")){     // Verificacao de escolha válida pelo usuário
+                    System.out.print("Opção Inválida! Digite Opção Válida: ");
+                    selecaoOpcao = entrada.nextLine();
+                }
 
+                //Confirmacao da opcao
+                System.out.print("Confirma opção? (Y/N) "); 
+                String confirmaOpcao = entrada.nextLine();
+                
+                while(!confirmaOpcao.toLowerCase().equals("n") && !confirmaOpcao.toLowerCase().equals("y")){ //verificacao de escolha de opcao CONFIRMA correta
+                    System.out.print("Opção Inválida! Escolha uma opção válida: ");
+                    confirmaOpcao = entrada.nextLine();
+                }
+                
+                if (confirmaOpcao.toLowerCase().equals("n")){
+                    System.out.println("Escolha sua opção novamente");
+                }
+                else{
+                    break; 
+                }
+
+            }
+        }
+        else{
+            while(true){
+                System.out.print("\nJogar(0) Passar a vez(1) Desistir(2): ");
+                selecaoOpcao = entrada.nextLine();
+
+                while (!selecaoOpcao.equals("0") && !selecaoOpcao.equals("1") && !selecaoOpcao.equals("2")){     // Verificacao de escolha válida pelo usuário
+                    System.out.print("Opção Inválida! Digite Opção Válida: ");
+                    selecaoOpcao = entrada.nextLine();
+                }
+
+                //Confirmacao da opcao
+                System.out.print("Confirma opção? (Y/N) "); 
+                String confirmaOpcao = entrada.nextLine();
+                
+                while(!confirmaOpcao.toLowerCase().equals("n") && !confirmaOpcao.toLowerCase().equals("y")){ //verificacao de escolha de opcao CONFIRMA correta
+                    System.out.print("Opção Inválida! Escolha uma opção válida: ");
+                    confirmaOpcao = entrada.nextLine();
+                }
+                
+                if (confirmaOpcao.toLowerCase().equals("n")){
+                    System.out.println("Escolha sua opção novamente");
+                }
+                else{
+                    break; 
+                }
+            }
         }
 
 
@@ -63,7 +188,7 @@ public class GerenciadorJogo {
 
     // Método de Turnos 
     public void turnosPVP(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
-        ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){ // implementar parametros
+        ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){ 
 
         // selecionar cartas ambos os jogadores
         selecionar(hacker1, hacker2, conjunto1, conjunto2, conjunto3, qtdAtqDef, qtdSup, entrada);
@@ -78,6 +203,7 @@ public class GerenciadorJogo {
         System.out.println("\n3: A cada novo turno, você ganha +1 de energia, mas nunca ulrapassa o limite de 10"); 
         System.out.println("\n4: Se seu deck esvaziar completamente, você receberá seu deck inicial de novo!");
         System.out.println("\n5: Você pode escolher jogar, passar a vez ou desistir a cada turno!");
+        System.out.println("\n6: Se não tiver energia suficiente para jogar, você só poderá passar a vez ou desistir!");
         System.out.println("\nBom jogo!");
 
         // while (verificar vida)
@@ -86,27 +212,19 @@ public class GerenciadorJogo {
             ArrayList<Integer> armazenaJogador2 = new ArrayList<>(); // vetor que armazena selecao das cartas da mao jogada JOGADOR 2
             
             // Mensagem Turno 
-            System.out.println("\nTurno " + contadorTurnos);
+            System.out.println("\noooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"); // separador turnos
+            System.out.println("\nTURNO " + contadorTurnos);
 
-            // // verificador de desistencia jogador 1 - inicio turno  TRANSFORMAR EM MÉTODO
-            // int opcaoJogarPassarDesistir1 = verificaDesistencia(hacker1, entrada);
-            // if (opcaoJogarPassarDesistir1 == 2){
-            //     // se desistir, coloca a vida em zero e break
-            //     hacker1.diminuiVida(100);
-            //     break;
-            // }
-            // else if (opcaoJogarPassarDesistir == 1){
-            //     // se passar, imprime mensagem
-            //     System.out.println("\n" + hacker1.getNome() + " passou a vez!");
-
-            // }
-            // else{
-            //     // se jogar, chama o turno
-            //     selecaoMaoJogador(hacker1, armazenaJogador1, entrada);
-            //     // turno jogador 1   
-            // }
+            // reiniciando pontos de ataque e defesa dos jogadores
+            hacker1.reinicioTurnoPontosAtqDef();
+            hacker2.reinicioTurnoPontosAtqDef();
 
             if (contadorTurnos % 2 == 0){
+                // mensagem de inicio de turno + impressao deck pro jogador pensar se joga ou nao JOGADOR 2
+                System.out.println("\n------------------------------------------------------------------"); // separador vez 
+                System.out.println("\n=> Sua vez, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
+                hacker2.imprimirCartasDeck();
+
                 // verifica desistencia jogador 2
                 int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
 
@@ -114,6 +232,11 @@ public class GerenciadorJogo {
                 if (opcaoJogarPassarDesistir2 == 2){
                     break;
                 }
+
+                // mensagem de inicio de turno + impressao deck pro jogador pensar se joga ou nao JOGADOR 1
+                System.out.println("\n------------------------------------------------------------------"); // separador vez 
+                System.out.println("\n=> Sua vez, " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")!");
+                hacker1.imprimirCartasDeck();
 
                 // verifica desistencia jogador 1
                 int opcaoJogarPassarDesistir1 = verificaDesistencia(hacker1, entrada);
@@ -123,12 +246,22 @@ public class GerenciadorJogo {
                 }
             }
             else{
+                // mensagem de inicio de turno + impressao deck pro jogador pensar se joga ou nao JOGADOR 1
+                System.out.println("\n------------------------------------------------------------------"); // separador vez 
+                System.out.println("\n=> Sua vez, " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")!");
+                hacker1.imprimirCartasDeck();
+
                 // verifica desistencia jogador 1
                 int opcaoJogarPassarDesistir1 = verificaDesistencia(hacker1, entrada);
                 turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada);
                 if (opcaoJogarPassarDesistir1 == 2){
                     break;
                 }
+
+                // mensagem de inicio de turno + impressao deck pro jogador pensar se joga ou nao JOGADOR 2
+                System.out.println("\n------------------------------------------------------------------"); // separador vez 
+                System.out.println("\n=> Sua vez, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
+                hacker2.imprimirCartasDeck();
 
                 // verifica desistencia jogador 2
                 int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
@@ -138,36 +271,34 @@ public class GerenciadorJogo {
                 }
             }
 
-            // // verificador de desistencia jogador 2 -  TRANSFORMAR EM MÉTODO
-            // int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
-            // if (opcaoJogarPassarDesistir2 == 2){
-            //     // se desistir, coloca a vida em zero e break
-            //     hacker2.diminuiVida(100);
-            //     break;
-            // }
-            // else if (opcaoJogarPassarDesistir2 == 1){
-            //     // se passar, imprime mensagem
-            //     System.out.println("\n" + hacker2.getNome() + " passou a vez!");
-
-            // }
-            // else{
-            //     // se jogar, chama o turno
-            //     selecaoMaoJogador(hacker2, armazenaJogador2, entrada);
-
-            //     // turno jogador 2   
-            // }
-
             // display cartas "Painel Turno ... " ================ (colocar em cima e em baixo)
-            System.out.println("\nPainel do Turno:" + "\n===========================================");
+            System.out.println("\nPainel do Turno " + contadorTurnos + ":" + "\n=================================================================="); // separador painel
             System.out.println("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") jogou:");
             // imprimir mao jogada; se o jogador tiver passado a vez verificar tam do vetor == 0, e imprime "passou a vez"
+            if (armazenaJogador1.size() == 0){
+                System.out.println("Passou a vez!\n");
+            }
+            else{
+                for (int i = 0; i < armazenaJogador1.size(); i++){
+                    hacker1.imprimeCartaDeckManipulavel(armazenaJogador1.get(i));
+                }
+            }
 
             System.out.println("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") jogou:");
             // imprimir mao jogada; se o jogador tiver passado a vez verificar tam do vetor == 0, e imprime "passou a vez"
+            if (armazenaJogador2.size() == 0){
+                System.out.println("Passou a vez!\n");
+            }
+            else{
+                for (int i = 0; i < armazenaJogador2.size(); i++){
+                    hacker2.imprimeCartaDeckManipulavel(armazenaJogador2.get(i));
+                }
+            }
 
-            System.out.println("\n===========================================");
+            System.out.println("==================================================================");
 
             // IMPLEMENTAR PONTOS DE ATAQUE, DEFESA E SUPORTE
+            consolidaTurno(hacker1, hacker2, armazenaJogador1, armazenaJogador2);
 
             // mostrar pontos de vida e energia 
             System.out.println("\nDados " + hacker1.getNome() + "(" + hacker1.getMatricula() + "):\n" + "Vida: " + hacker1.getVida() + " Energia: " + hacker1.getEnergia());
@@ -231,26 +362,22 @@ public class GerenciadorJogo {
 
     // Método selecao da mao jogada de um jogador
     public void selecaoMaoJogador(Jogador hacker, ArrayList<Integer> armazena, Scanner entrada){
-        System.out.println("\nJogue suas cartas, " + hacker.getNome() + "(" + hacker.getMatricula() + ")!");
-        System.out.println("\nSeu deck: ");
-        hacker.imprimirCartasDeck();
         System.out.println("\nEscolha as cartas pelo índice: ");
 
         int qtdCartasDeck = hacker.deckManipulavelsize();
-        //int[] armazena = new int[qtdCartasDeck]; //vetor para armazenar as cartas escolhidas 
-        // int tamArmazena; // para verificar o tamanho do armazena depois
         
         // fazer um while até ser escolhido uma mão válida
         while(true){
-            // tamArmazena = 0;
+            // limpando o ArrayList armazena
+            armazena.clear();
+
             selecionarCartasManipulavel(hacker, armazena, qtdCartasDeck, entrada);
             // confirmar a mao jogada, mostrando as cartas selecionadas juntas
             System.out.println("\nSua mão escolhida: ");
-            hacker.imprimirCartasDeck();
-            // for (int i = 0; i < armazena.size(); i++){
-            //     hacker.imprimeCartaDeckManipulavel(armazena.get(i));
-            // }
-            System.out.print("\nConfirma Seleção? (Y/N) ");
+            for (int i = 0; i < armazena.size(); i++){
+                hacker.imprimeCartaDeckManipulavel(armazena.get(i));
+            }
+            System.out.print("Confirma Seleção? (Y/N) ");
 
             String confirmaMao = entrada.nextLine();
             
@@ -302,7 +429,7 @@ public class GerenciadorJogo {
             selecaoAleatoria(hacker, conjunto1, conjunto2, conjunto3, qtdAtqDef, qtdSup); // escolha aleatória BOT
         }
         else{
-            System.out.println("\n" + hacker.getNome() + "(" + hacker.getMatricula() + "), selecione suas cartas!");
+            System.out.println("\n=> " + hacker.getNome() + "(" + hacker.getMatricula() + "), selecione suas cartas!");
             System.out.print("Selecionar cartas (1)  Seleção Aleatória (2): ");  // Perguntando sobre escolha de selecao de cartas
             String selecao = entrada.nextLine();
 
@@ -398,14 +525,28 @@ public class GerenciadorJogo {
     }
 
     // Método Selecao Aleatoria
-    public void selecaoAleatoria(Jogador hacker, ArrayList<CartaP> conjunto, int qtdCartas){
+    public void selecaoAleatoria(Jogador hacker, ArrayList<CartaP> conjunto, int qtdCartas){ 
         int numeroCarta;
+        int[] verificarNumCartasRept = new int[qtdCartas];
+        boolean numeroRept;
         
         //escolher número aleatório entre 1 e conjunto.size()+1
         Random gerador = new Random();
         for (int i = 0; i < qtdCartas; i++){
+            numeroRept = false;
             numeroCarta = gerador.nextInt(conjunto.size()) + 1;
-            hacker.adicionaNoDeck(conjunto, numeroCarta);
+            for (int j = 0; j < i; j++){
+                if (numeroCarta == verificarNumCartasRept[j]){
+                    numeroRept = true;
+                }
+            }
+            if (numeroRept){
+                i--;
+            }
+            else{
+                verificarNumCartasRept[i] = numeroCarta;
+                hacker.adicionaNoDeck(conjunto, numeroCarta);
+            }
         }
     }
 

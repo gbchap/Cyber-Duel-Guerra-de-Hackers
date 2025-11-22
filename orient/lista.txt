@@ -15,17 +15,14 @@ isso pelo indice do turno (impar o 1 comeca e par o 2 comeca) FEITO!
 
 -Arrumar os parametros, mudar na main e testar FEITO!
 
--Pensar em como ajeitar os pontos de ataque, defesa e suporte // precisarei de ajuda
+-Pensar em como ajeitar os pontos de ataque, defesa e suporte // precisarei de ajuda FEITO!
 
--deixar o esqueleto pronto para o funcionamento do bot 
-
--criar um outro arquivo java AcoesJogo.java pra colocar acoes do jogo la, no pacote hackers, 
-usando protected no deck manipulavel pra ficar bem mais fácil
+-deixar o esqueleto pronto para o funcionamento do bot FEITO
 
 -colocar matricula como parte do identificador do usuário "Nome(matricula)" FEITO!
 
 
--Verificar Selecao Aleatoria, pq existe a chance de escolher o mesmo numero
+-Verificar Selecao Aleatoria, pq existe a chance de escolher o mesmo numero FEITO!
 
 -Verificar mensagem de vitoria, pq esta dando algum erro FEITO!
 
@@ -36,10 +33,10 @@ usando protected no deck manipulavel pra ficar bem mais fácil
 
 -Colocar confirmacao na selecao de opcao Jogar, Passar ou Desistir FEITO!
 
--Quando o jogador escolhe uma mao e desiste, o deck antigo nao esvazia. Verificar!
--Não está deletando deck manipulavel
--Ajeitar espacamento nas impressoes da mao escolhida!
--Fazer o painel funcionar!
+-Quando o jogador escolhe uma mao e desiste, o deck antigo nao esvazia. Verificar! FEITO!
+-Não está deletando deck manipulavel FEITO!
+-Ajeitar espacamento nas impressoes da mao escolhida! FEITO!
+-Fazer o painel funcionar! FEITO!
 
 --------Gabi-----
 
@@ -48,5 +45,7 @@ usando protected no deck manipulavel pra ficar bem mais fácil
 -------Dyanna----
 
 -tentar otimizar o maximo possivel (tem umas acoes minhas dentro de métodos e etc que podem virar métodos e deixar tudo mais organizado)
+    --criar um outro arquivo java AcoesJogo.java pra colocar acoes do jogo la, no pacote hackers, usando protected no deck manipulavel 
+    pra ficar bem mais fácil
 
--olhar o txt
+-olhar o txt ou outro arquivo que ache mais interessante para o trabalho

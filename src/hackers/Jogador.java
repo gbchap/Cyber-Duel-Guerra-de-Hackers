@@ -74,8 +74,9 @@ public class Jogador{
         return pontosDeVida;
     }
 
-    public void preencherDeckManipulavel(){
-        deckManipulavel = deck;
+    public void preencherDeckManipulavel(){ // preenche o deck 
+        deckManipulavel.clear();
+        deckManipulavel.addAll(deck);
     }
 
     public int deckManipulavelsize(){
@@ -86,31 +87,97 @@ public class Jogador{
         return deckManipulavel.get(i).getNome();
     }
 
-    // public void imprimeCartaDeckManipulavel(int i){
-    //     System.out.println("\n");
-    //     deckManipulavel.get(i).imprime();
-    // }
+    public void imprimeCartaDeckManipulavel(int i){
+        deckManipulavel.get(i).imprime();
+        System.out.print("\n");
+    }
 
     public int custoCartaDeckManipulavel(int i){
         return deckManipulavel.get(i).getCusto();
+    }
+
+    public String tipoCartaDeckManipulavel(int i){
+        return deckManipulavel.get(i).getTipo();
+    }
+
+    public String efeitoCartaDeckManipulavel(int i){
+        return deckManipulavel.get(i).getEfeito();
+    }
+
+    public double poderCartaDeckManipulavel(int i){
+        return deckManipulavel.get(i).getPoder();
     }
 
     public void zeraVida(){
         pontosDeVida = 0;
     }
 
+    public void aumentaVida(double maisVida){
+        pontosDeVida += maisVida;
+    }
+
+    public void aumentaAtaque(double maisAtaque){
+        qtdAtaque += maisAtaque;
+    }
+
+    public void aumentaDefesa(double maisDefesa){
+        qtdDefesa += maisDefesa;
+    }
+
+    public void reinicioTurnoPontosAtqDef(){
+        qtdAtaque = 0;
+        qtdDefesa = 0;
+    }
+
+    public void diminuiAtaque(double porcentagem){
+        qtdAtaque = qtdAtaque * porcentagem;
+    }
+
+    public void atualizaVida(double perdaVida){
+        if (perdaVida >= 0){
+            if (pontosDeVida - perdaVida < 0){
+                pontosDeVida = 0;
+            }
+            else{
+                pontosDeVida -= perdaVida;
+            }
+        }
+    }
+
+    public void arredondaVida(){
+        pontosDeVida = (Math.round(pontosDeVida / 10.0) * 10.0);
+    }
+
+    public double getAtaque(){
+        return qtdAtaque;
+    }
+
+    public double getDefesa(){
+        return qtdDefesa;
+    }
+
+
     public void deletaCartasDeckManipulavel(ArrayList<Integer> armazena){
-        //os indices mudam, então pensar numa funcao para isso
-        for (int i = 0; i < armazena.size(); i++){
-            deckManipulavel.remove(armazena.get(i));
-            for (int j = i+1; j< armazena.size(); j++){
-                if (armazena.get(j) > armazena.get(i)){
-                    armazena.set(j, armazena.get(i) - 1);
+        // ordena o vetor armazena em ordem decrescente
+        for (int i = 0; i < armazena.size() - 1; i++) {
+            for (int j = i + 1; j < armazena.size(); j++) {
+                if (armazena.get(i) < armazena.get(j)) {
+                    // troca
+                    int temp = armazena.get(i);
+                    armazena.set(i, armazena.get(j));
+                    armazena.set(j, temp);
                 }
             }
         }
 
+        // remove os indices sem causar problema de mudanca nos indices
+        for (int i = 0; i < armazena.size(); i++) {
+            int indice = armazena.get(i);
+            deckManipulavel.remove(indice);
+        }
     }
+
+
 
     public boolean deckManipulavelEhVazio(){
         if (deckManipulavel.size() == 0){

@@ -46,15 +46,15 @@ public class Main {
 
         if (robo_humano.equals("0")){ //Caminho se a opcao BOT for escolhida -> TRANSFORMAR EM MÉTODO GERENCIADORJOGO
             hacker2 = new Jogador("BOT", "202565001");
-            GerenciadorJogo gerenciador = new GerenciadorJogo(hacker1, hacker2);
+            GerenciadorJogo gerenciador = new GerenciadorJogo();
 
-            gerenciador.selecionar(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
+            gerenciador.turnoBOT(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
         }
         else{ // Caminho se a opcao jogador for escolhida -> TRANSFORMAR EM MÉTODO GERENCIADORJOGO
             hacker2 = new Jogador();
             System.out.println("\nBem Vindo, Jogador 2. Digite suas informações!");
             hacker2.coletarInfo(entrada);
-            GerenciadorJogo gerenciador = new GerenciadorJogo(hacker1, hacker2);
+            GerenciadorJogo gerenciador = new GerenciadorJogo();
 
             gerenciador.turnosPVP(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
         }
