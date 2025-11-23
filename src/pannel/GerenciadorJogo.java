@@ -1,6 +1,5 @@
 package pannel;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 import data.CartaP;
@@ -14,7 +13,8 @@ public class GerenciadorJogo {
     // Método Turnos PLAYER x BOT
     public void turnoBOT(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
     ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){
-        // IMPLEMENTAR
+
+        
     }
 
     // Método faz a atualizacao dos pontos de defesa e ataque do jogador, analisando o suporte
@@ -412,8 +412,6 @@ public class GerenciadorJogo {
             replay.salvar("replay.txt");
         }
 
-
-
     }
 
 
@@ -432,7 +430,6 @@ public class GerenciadorJogo {
             selecaoMaoJogador(hacker, armazena, entrada);
         }
     }
-
 
 
     // Método selecao da mao jogada de um jogador
