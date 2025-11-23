@@ -339,6 +339,9 @@ public class GerenciadorJogo {
         System.out.println("\n6: Se não tiver energia suficiente para jogar, você só poderá passar a vez ou desistir!");
         System.out.println("\n\nBOM JOGO!\n");
 
+        System.out.println("Tecle 'Enter' para inciar o jogo!");
+        entrada.nextLine();
+
         //while principal do jogo, que verifica vida etc
         while (hacker1.getVida() != 0 && hacker2.getVida() != 0){
 
