@@ -425,31 +425,38 @@ public class GerenciadorJogo {
             // JOGADOR 1
             if (armazenaJogador1.size() == 0) {
                 replay.add("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") passou a vez.");
+                Espera.esperar(0.5);
+
             } else {
                 replay.add("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") jogou:");
                 for (int idx : armazenaJogador1) {
                     CartaP carta = hacker1.getDeckManipulavel().get(idx);
                     replay.add(" - " + carta.getNome() + " (" + carta.getTipo() + ")");
+                    Espera.esperar(0.1);
                 }
             }
 
             // JOGADOR 2
             if (armazenaJogador2.size() == 0) {
                 replay.add("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") passou a vez.");
+                    Espera.esperar(0.5);
             } else {
                 replay.add("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") jogou:");
                 for (int idx : armazenaJogador2) {
                     CartaP carta = hacker2.getDeckManipulavel().get(idx);
                     replay.add(" - " + carta.getNome() + " (" + carta.getTipo() + ")");
+                    Espera.esperar(0.1);
                 }
             }
 
             if (armazenaJogador1.size() == 0){
                 System.out.println("Passou a vez!\n");
+                Espera.esperar(0.5);
             }
             else{
                 for (int i = 0; i < armazenaJogador1.size(); i++){
                     hacker1.imprimeCartaDeckManipulavel(armazenaJogador1.get(i));
+                    Espera.esperar(0.1);
                 }
             }
 
@@ -457,10 +464,12 @@ public class GerenciadorJogo {
             // imprimir mao jogada; se o jogador tiver passado a vez verificar tam do vetor == 0, e imprime "passou a vez"
             if (armazenaJogador2.size() == 0){
                 System.out.println("Passou a vez!\n");
+                Espera.esperar(0.5)
             }
             else{
                 for (int i = 0; i < armazenaJogador2.size(); i++){
                     hacker2.imprimeCartaDeckManipulavel(armazenaJogador2.get(i));
+                    Espera.esperar(0.1);
                 }
             }
 
