@@ -12,7 +12,7 @@ public class GerenciadorJogo {
     GerenciadorJogo(){}
 
     // Método Turnos PLAYER x BOT
-    public void turno(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
+    public void turnoBOT(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
     ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){
         // IMPLEMENTAR
     }

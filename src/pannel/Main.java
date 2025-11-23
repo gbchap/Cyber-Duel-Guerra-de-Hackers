@@ -40,7 +40,7 @@ public class Main {
         
         String robo_humano = entrada.nextLine();
         while (!robo_humano.equals("0") && !robo_humano.equals("1")){ //Verificacao de opcao válida!
-            System.out.print("Opção Inválida! Digite uma Opção Válida: ");
+            System.out.print("Opção Inválida! Digite Opção Válida: ");
             robo_humano = entrada.nextLine();
         }
 
@@ -48,7 +48,7 @@ public class Main {
             hacker2 = new Jogador("BOT", "202565001");
             GerenciadorJogo gerenciador = new GerenciadorJogo();
 
-            //gerenciador.turnoBOT(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
+            gerenciador.turnoBOT(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
         }
         else{ // Caminho se a opcao jogador for escolhida -> TRANSFORMAR EM MÉTODO GERENCIADORJOGO
             hacker2 = new Jogador();
