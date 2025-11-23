@@ -46,13 +46,18 @@ public class Jogador{
         deck.add(conjunto.get(index - 1));
     }
 
-    public void imprimirCartasDeck(){ // imprime as cartas armazenadas no deck
+    public void imprimirCartasDeck() { 
         System.out.println("\nCartas no Deck: ");
-        for (int i = 0; i < deckManipulavel.size(); i++){
-            System.out.println("\nCarta " + (i+1) + ": ");
-            deckManipulavel.get(i).imprime();
+        
+        for (int i = 0; i < deckManipulavel.size(); i++) {
+            CartaP c = deckManipulavel.get(i);
+
+            System.out.println("\nCarta " + (i + 1) + ":");
+            System.out.println("Custo: " + c.getCusto()); // << ADICIONADO
+            c.imprime(); // mantém sua impressão atual
         }
     }
+
 
     public ArrayList<CartaP> getDeck() {
     return deck;

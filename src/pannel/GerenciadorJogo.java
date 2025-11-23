@@ -222,7 +222,7 @@ public class GerenciadorJogo {
             ArrayList<Integer> armazenaJogador2 = new ArrayList<>(); // vetor que armazena selecao das cartas da mao jogada JOGADOR 2
 
             replay.add("\n======================================");
-            replay.add("TURNO " + contadorTurnos);
+            replay.add("TURNO " + contadorTurnos + "\n");
             replay.add("Vida P1: " + hacker1.getVida() + " | Energia P1: " + hacker1.getEnergia());
             replay.add("Vida P2: " + hacker2.getVida() + " | Energia P2: " + hacker2.getEnergia());
             
@@ -243,7 +243,7 @@ public class GerenciadorJogo {
                 // verifica desistencia jogador 2
                 int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
 
-                turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada);
+                turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada, replay);
                 if (opcaoJogarPassarDesistir2 == 2){
                     break;
                 }
@@ -255,7 +255,7 @@ public class GerenciadorJogo {
 
                 // verifica desistencia jogador 1
                 int opcaoJogarPassarDesistir1 = verificaDesistencia(hacker1, entrada);
-                turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada);
+                turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada, replay);
                 if (opcaoJogarPassarDesistir1 == 2){
                     break;
                 }
@@ -268,7 +268,7 @@ public class GerenciadorJogo {
 
                 // verifica desistencia jogador 1
                 int opcaoJogarPassarDesistir1 = verificaDesistencia(hacker1, entrada);
-                turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada);
+                turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada, replay);
                 if (opcaoJogarPassarDesistir1 == 2){
                     break;
                 }
@@ -280,7 +280,7 @@ public class GerenciadorJogo {
 
                 // verifica desistencia jogador 2
                 int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
-                turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada);
+                turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada, replay);
                 if (opcaoJogarPassarDesistir2 == 2){
                     break;
                 }
@@ -386,33 +386,47 @@ public class GerenciadorJogo {
 
         }
 
-        // OPCAO REPLAY ENTRA AQUI!!!!!
-        System.out.print("\nDeseja salvar o replay? (s/n): ");
-        String respReplay = entrada.nextLine();
+        // OPÇÃO REPLAY SEM CONFIRMAÇÃO
+        String respReplay;
 
-        if (respReplay.equalsIgnoreCase("s")) {
+        while (true) {
+            System.out.print("\nDeseja salvar o replay? (Y/N): ");
+            respReplay = entrada.nextLine().trim().toLowerCase();
+
+            // validação simples
+            if (respReplay.equals("y") || respReplay.equals("n")) {
+                break;
+            } else {
+                System.out.println("Opção Inválida! Digite apenas Y ou N.");
+            }
+        }
+
+        if (respReplay.equals("y")) {
             replay.salvar("replay.txt");
         }
+
+
 
     }
 
 
     // Método Turno Jogador 
-    public void turnoJogador(Jogador hacker, ArrayList<Integer> armazena, int opcaoJogarPassarDesistir, Scanner entrada){
-            if (opcaoJogarPassarDesistir == 2){
-                // se desistir, coloca a vida em zero
-                System.out.println("\n" + hacker.getNome() + "(" + hacker.getMatricula() + ") desistiu!");
-                hacker.zeraVida();
-            }
-            else if (opcaoJogarPassarDesistir == 1){
-                // se passar, imprime mensagem
-                System.out.println("\n" + hacker.getNome() + "(" + hacker.getMatricula() + ") passou a vez!");
-            }
-            else{
-                // se jogar, chama a selecao da mao
-                selecaoMaoJogador(hacker, armazena, entrada);  
-            }
+    public void turnoJogador(Jogador hacker, ArrayList<Integer> armazena, int opcaoJogarPassarDesistir, Scanner entrada, Replay replay){
+
+        if (opcaoJogarPassarDesistir == 2){
+            System.out.println("\n" + hacker.getNome() + "(" + hacker.getMatricula() + ") desistiu!");
+            replay.add(hacker.getNome() + " (" + hacker.getMatricula() + ") desistiu!");
+            hacker.zeraVida();
+        }
+        else if (opcaoJogarPassarDesistir == 1){
+            System.out.println("\n" + hacker.getNome() + "(" + hacker.getMatricula() + ") passou a vez!");
+            replay.add(hacker.getNome() + " passou a vez.");
+        }
+        else{
+            selecaoMaoJogador(hacker, armazena, entrada);
+        }
     }
+
 
 
     // Método selecao da mao jogada de um jogador
