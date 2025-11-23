@@ -10,12 +10,90 @@ public class GerenciadorJogo {
 
     public GerenciadorJogo(){}
 
-    // Método Turnos PLAYER x BOT
-    public void turnoBOT(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
-    ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){
-
+    // Método Turnos PLAYER x BOT; 
+    public void turnoBOT(Jogador bot, ArrayList<Integer> armazenaJogador2, Replay replay){ //bot será hacker2
         
+        //atualiza deck manipulavel
+        bot.preencherDeckManipulavel();
+        int energia = bot.getEnergia();
+
+        //processo que procura a carta de ataque e de defesa de menor custo
+
+        Integer idxMelhorAtq = null;
+        Integer idxMelhorDef = null;
+
+        for(int i=0; i < bot.deckManipulavelsize(); i++){
+            CartaP c = bot.getDeckManipulavel().get(i);
+            if (c.getTipo().equals("ATAQUE")){
+                if (idxMelhorAtq == null || c.getCusto() < bot.getDeckManipulavel().get(idxMelhorAtq).getCusto()){
+                    idxMelhorAtq = i;
+                }
+            }else if(c.getTipo().equals("DEFESA")){
+                if(idxMelhorDef == null || c.getCusto() < bot.getDeckManipulavel().get(idxMelhorDef).getCusto()){
+                    idxMelhorDef = i;
+                }
+            }
+        }
+
+        ArrayList<Integer> escolhas = new ArrayList<>();
+
+        // se a vida do bot estiver baixa, prioriza defesa; caso contrário, prioriza ataque.
+        boolean priorizaDefesa = bot.getVida() <= 30.0;
+
+        if(priorizaDefesa){
+            if(idxMelhorDef != null && bot.custoCartaDeckManipulavel(idxMelhorDef) <= energia){
+                escolhas.add(idxMelhorDef);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorAtq);
+            }
+            if (idxMelhorAtq != null && bot.custoCartaDeckManipulavel(idxMelhorAtq) <= energia){
+                if(!escolhas.contains(idxMelhorAtq)){
+                    escolhas.add(idxMelhorAtq);
+                    energia -= bot.custoCartaDeckManipulavel(idxMelhorAtq);
+                }
+            }
+        }else{
+            if (idxMelhorAtq != null && bot.custoCartaDeckManipulavel(idxMelhorAtq) <= energia){
+            escolhas.add(idxMelhorAtq);
+            energia -= bot.custoCartaDeckManipulavel(idxMelhorAtq);
+            }
+            if (idxMelhorDef != null && bot.custoCartaDeckManipulavel(idxMelhorDef) <= energia){
+                if (!escolhas.contains(idxMelhorDef)){
+                    escolhas.add(idxMelhorDef);
+                    energia -= bot.custoCartaDeckManipulavel(idxMelhorDef);
+                }
+            }
+        }
+
+        // bot vai tentar escolher máx 2 cartas/vez.
+        // (escolhas terá no máximo 2 índices: 1 defesa + 1 ataque).
+
+        if (escolhas.isEmpty()){
+            System.out.println("BOT não conseguiu escolher cartas por falta de energia ou cartas válidas. Passa a vez.");
+            replay.add("\n" + bot.getNome() + "(" + bot.getMatricula() + ") passou a vez.");
+            return;
+        }
+
+        // registra no armazena (índices das cartas jogadas)
+        armazenaJogador2.addAll(escolhas);
+
+        replay.add("\n" + bot.getNome() + "(" + bot.getMatricula() + ") jogou:");
+        for (int idx : escolhas) {
+            CartaP c = bot.getDeckManipulavel().get(idx);
+            replay.add(" - " + c.getNome() + " (" + c.getTipo() + ")");
+        }
+
+        // desconta energia real do bot
+        int custoTotal = 0;
+        for (int idx : escolhas) custoTotal += bot.custoCartaDeckManipulavel(idx);
+        bot.diminuiEnergia(custoTotal);
+
+        // imprime no console o que o bot jogou
+        System.out.println("\nBOT jogou:");
+        for (int idx : escolhas) {
+            bot.imprimeCartaDeckManipulavel(idx);
+        }
     }
+    
 
     // Método faz a atualizacao dos pontos de defesa e ataque do jogador, analisando o suporte
     public double atualizacaoPontos (Jogador hacker, ArrayList<Integer> armazena, double diminuicaoAtaque, double aumentoMaiorAtaque,
@@ -278,11 +356,14 @@ public class GerenciadorJogo {
                 System.out.println("\n=> SUA VEZ, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
                 hacker2.imprimirCartasDeck();
 
-                // verifica desistencia jogador 2
-                int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
-                turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada, replay);
-                if (opcaoJogarPassarDesistir2 == 2){
-                    break;
+                if(hacker2.getNome().equals("BOT")){
+                    turnoBOT(hacker2, armazenaJogador2, replay);
+                }else{
+                    int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
+                    if (opcaoJogarPassarDesistir2 == 2){
+                        break;
+                    }
+                    turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada, replay);
                 }
             }
 

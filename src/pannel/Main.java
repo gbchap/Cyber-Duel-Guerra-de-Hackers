@@ -48,7 +48,7 @@ public class Main {
             hacker2 = new Jogador("BOT", "202565001");
             GerenciadorJogo gerenciador = new GerenciadorJogo();
 
-            gerenciador.turnoBOT(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
+            gerenciador.turnosPVP(hacker1, hacker2, ataques, defesas, suportes, 4, 2, entrada); // selecionar as cartas dos jogadores
         }
         else{ // Caminho se a opcao jogador for escolhida -> TRANSFORMAR EM MÉTODO GERENCIADORJOGO
             hacker2 = new Jogador();
