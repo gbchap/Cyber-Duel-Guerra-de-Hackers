@@ -282,6 +282,7 @@ public class GerenciadorJogo {
             replay.add(c.getNome() + " | Tipo: " + c.getTipo() + " | Poder: " + c.getPoder() + " | Custo: " + c.getCusto());
         }
 
+        Espera.esperar(1);
         System.out.println("\n\nComeçando o jogo...");
         int contadorTurnos = 1; // contar os turnos
         // Mostrando as regras
@@ -293,6 +294,11 @@ public class GerenciadorJogo {
         System.out.println("\n5: Você pode escolher jogar, passar a vez ou desistir a cada turno!");
         System.out.println("\n6: Se não tiver energia suficiente para jogar, você só poderá passar a vez ou desistir!");
         System.out.println("\n\nBOM JOGO!\n");
+        //Espera.esperar(3);
+
+        System.out.println("Tecle 'Enter' para inciar o jogo!");
+        entrada.nextLine();
+
 
         // while (verificar vida)
         while (hacker1.getVida() != 0 && hacker2.getVida() != 0){
