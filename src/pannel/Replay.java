@@ -17,7 +17,7 @@ public class Replay {
             for (String l : log) {
                 fw.write(l + System.lineSeparator());
             }
-            System.out.println("\nReplay salvo em: " + nomeArquivo);
+            System.out.println("\nREPLAY SALVO EM: " + nomeArquivo + "\n");
         } catch (IOException e) {
             System.out.println("Erro ao salvar o replay: " + e.getMessage());
         }

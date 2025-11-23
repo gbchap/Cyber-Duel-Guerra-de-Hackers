@@ -26,7 +26,7 @@ public class Jogador{
     public void coletarInfo(Scanner entrada){ 
         System.out.print("\nDigite seu nome: ");
         this.nome = entrada.nextLine();
-        System.out.print("Digite seu identificador (número de matrícula): ");
+        System.out.print("\nDigite seu identificador (número de matrícula): ");
         this.matricula = entrada.nextLine();
     }
 
@@ -47,20 +47,17 @@ public class Jogador{
     }
 
     public void imprimirCartasDeck() { 
-        System.out.println("\nCartas no Deck: ");
+        System.out.println("\n\u001B[3;4mCARTAS NO DECK:\u001B[0m");
         
-        for (int i = 0; i < deckManipulavel.size(); i++) {
-            CartaP c = deckManipulavel.get(i);
-
-            System.out.println("\nCarta " + (i + 1) + ":");
-            System.out.println("Custo: " + c.getCusto()); // << ADICIONADO
-            c.imprime(); // mantém sua impressão atual
+        for (int i = 0; i < deckManipulavel.size(); i++){
+            System.out.println("\nCarta " + (i+1) + ": ");
+            deckManipulavel.get(i).imprime();
         }
     }
 
 
     public ArrayList<CartaP> getDeck() {
-    return deck;
+        return deck;
     }
 
     public ArrayList<CartaP> getDeckManipulavel() {

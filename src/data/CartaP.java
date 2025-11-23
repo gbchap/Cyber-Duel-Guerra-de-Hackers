@@ -38,23 +38,13 @@ public class CartaP{
     }
 
     public void imprime() {
-        if (this.tipo.equals("SUPORTE")) {
-            System.out.println(
-                "Nome: " + nome +
-                " | Tipo: " + tipo +
-                " | Poder: " + poder +
-                " | Custo: " + custo +
-                " | Efeito: " + efeito +
-                " | Descricao: " + descricao
-            );
-        } else {
-            System.out.println(
-                "Nome: " + nome +
-                " | Tipo: " + tipo +
-                " | Poder: " + poder +
-                " | Custo: " + custo +
-                " | Descricao: " + descricao
-            );
+        if (this.tipo.equals("SUPORTE")){
+            System.out.println("NOME: " + nome + " // TIPO: " + tipo + " // PODER: " + poder +
+            " // CUSTO: " + custo + " // EFEITO: " + efeito);
+        }
+        else{
+            System.out.println("NOME: " + nome + " // TIPO: " + tipo + " // PODER: " + poder +
+            " // CUSTO: " + custo);
         }
     }
 
