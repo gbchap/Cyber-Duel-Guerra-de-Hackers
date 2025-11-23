@@ -37,14 +37,15 @@ public class CartaP{
         return poder;
     }
 
-    public void imprime(){
+    public void imprime() {
         if (this.tipo.equals("SUPORTE")){
-            System.out.println("Nome: " + nome + ", Tipo: " + tipo + ", Poder: " + poder +
-            ", Custo: " + custo + ", Efeito: " + efeito + ", Descricao: " + descricao);
+            System.out.println("NOME: " + nome + " // TIPO: " + tipo + " // PODER: " + poder +
+            " // CUSTO: " + custo + " // EFEITO: " + efeito);
         }
         else{
-            System.out.println("Nome: " + nome + ", Tipo: " + tipo + ", Poder: " + poder +
-            ", Custo: " + custo + ", Descricao: " + descricao);
+            System.out.println("NOME: " + nome + " // TIPO: " + tipo + " // PODER: " + poder +
+            " // CUSTO: " + custo);
         }
     }
+
 }

@@ -27,8 +27,8 @@ public class Main {
         System.out.println("Defesas: " + defesas.size());
         System.out.println("Suportes: " + suportes.size());
 
-
-        System.out.println("\nBem-vindo, jogador. Digite suas informações."); // Interacao inicial com o usuário
+        System.out.println("*----------------------------------------------------");
+        System.out.println("\nBEM-VINDO AO JOGO!!! Jogador, digite suas informações!"); // Interacao inicial com o usuário
         
         Scanner entrada = new Scanner(System.in); //Scanner para interagir com o usuário
 
@@ -36,7 +36,7 @@ public class Main {
         Jogador hacker2;
         hacker1.coletarInfo(entrada);
         
-        System.out.print("\nSeu competidor será um robô (0) ou um humano? (1): "); // Pergunta sobre como vai ser o jogo: contra bot ou outro jogador
+        System.out.print("\n\nSeu competidor será um robô (0) ou um humano? (1): "); // Pergunta sobre como vai ser o jogo: contra bot ou outro jogador
         
         String robo_humano = entrada.nextLine();
         while (!robo_humano.equals("0") && !robo_humano.equals("1")){ //Verificacao de opcao válida!
@@ -52,7 +52,7 @@ public class Main {
         }
         else{ // Caminho se a opcao jogador for escolhida -> TRANSFORMAR EM MÉTODO GERENCIADORJOGO
             hacker2 = new Jogador();
-            System.out.println("\nBem Vindo, Jogador 2. Digite suas informações!");
+            System.out.println("\n\nBEM-VINDO, JOGADOR 2. Digite suas informações!");
             hacker2.coletarInfo(entrada);
             GerenciadorJogo gerenciador = new GerenciadorJogo();
 

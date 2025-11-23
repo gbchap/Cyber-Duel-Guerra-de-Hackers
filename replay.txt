@@ -1,0 +1,33 @@
+=== DECK INICIAL DO JOGADOR 1 ===
+Exploit Zero-Day | Tipo: ATAQUE | Poder: 50.0 | Custo: 5
+Ransomware Avançado | Tipo: ATAQUE | Poder: 50.0 | Custo: 5
+Rootkit Oculto | Tipo: ATAQUE | Poder: 50.0 | Custo: 5
+Ataque Quântico | Tipo: ATAQUE | Poder: 50.0 | Custo: 5
+Criptografia Quântica | Tipo: DEFESA | Poder: 50.0 | Custo: 5
+Escudo Quântico | Tipo: DEFESA | Poder: 50.0 | Custo: 5
+IA de Defesa Adaptativa | Tipo: DEFESA | Poder: 50.0 | Custo: 5
+Fortaleza de Hardware | Tipo: DEFESA | Poder: 50.0 | Custo: 5
+Atualização de Firmware | Tipo: SUPORTE | Poder: 0.2 | Custo: 2
+Overclock de CPU | Tipo: SUPORTE | Poder: 0.2 | Custo: 2
+
+=== DECK INICIAL DO JOGADOR 2 ===
+Comprometimento de Firmware | Tipo: ATAQUE | Poder: 50.0 | Custo: 5
+SQL Injection Avancado | Tipo: ATAQUE | Poder: 30.0 | Custo: 3
+Roteamento Malicioso | Tipo: ATAQUE | Poder: 10.0 | Custo: 1
+Ping de Teste | Tipo: ATAQUE | Poder: 10.0 | Custo: 1
+Proteção de Núcleo | Tipo: DEFESA | Poder: 50.0 | Custo: 5
+Sistema de Backup Incremental | Tipo: DEFESA | Poder: 30.0 | Custo: 3
+Quarentena de Arquivo | Tipo: DEFESA | Poder: 10.0 | Custo: 1
+Proteção de Porta | Tipo: DEFESA | Poder: 10.0 | Custo: 1
+Bloqueio Dinâmico | Tipo: SUPORTE | Poder: 0.3 | Custo: 3
+Otimizador de Scripts | Tipo: SUPORTE | Poder: 0.1 | Custo: 1
+
+======================================
+TURNO 1
+
+Vida P1: 100.0 | Energia P1: 10
+Vida P2: 100.0 | Energia P2: 10
+
+r(3) desistiu!
+
+VENCEDOR: t(4)

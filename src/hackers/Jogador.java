@@ -26,7 +26,7 @@ public class Jogador{
     public void coletarInfo(Scanner entrada){ 
         System.out.print("\nDigite seu nome: ");
         this.nome = entrada.nextLine();
-        System.out.print("Digite seu identificador (número de matrícula): ");
+        System.out.print("\nDigite seu identificador (número de matrícula): ");
         this.matricula = entrada.nextLine();
     }
 
@@ -46,13 +46,24 @@ public class Jogador{
         deck.add(conjunto.get(index - 1));
     }
 
-    public void imprimirCartasDeck(){ // imprime as cartas armazenadas no deck
-        System.out.println("\nCartas no Deck: ");
+    public void imprimirCartasDeck() { 
+        System.out.println("\n\u001B[3;4mCARTAS NO DECK:\u001B[0m");
+        
         for (int i = 0; i < deckManipulavel.size(); i++){
             System.out.println("\nCarta " + (i+1) + ": ");
             deckManipulavel.get(i).imprime();
         }
     }
+
+
+    public ArrayList<CartaP> getDeck() {
+        return deck;
+    }
+
+    public ArrayList<CartaP> getDeckManipulavel() {
+        return deckManipulavel;
+    }
+
 
     public void aumentaEnergia(){ // energia ganha ao fim dos turnos
         if (pontosDeEnergia < 10){
