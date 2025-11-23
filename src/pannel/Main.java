@@ -1,6 +1,7 @@
 package pannel;
 
 import data.CartaP;
+import data.LeitorCSV;
 import pannel.GerenciadorJogo;
 import hackers.Jogador;
 import java.util.Scanner;

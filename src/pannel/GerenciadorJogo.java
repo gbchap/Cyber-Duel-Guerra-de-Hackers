@@ -325,6 +325,7 @@ public class GerenciadorJogo {
             replay.add(c.getNome() + " | Tipo: " + c.getTipo() + " | Poder: " + c.getPoder() + " | Custo: " + c.getCusto());
         }
 
+        Espera.esperar(1);
         System.out.println("\n\nComeçando o jogo...");
         int contadorTurnos = 1; // contar os turnos
 
@@ -337,6 +338,12 @@ public class GerenciadorJogo {
         System.out.println("\n5: Você pode escolher jogar, passar a vez ou desistir a cada turno!");
         System.out.println("\n6: Se não tiver energia suficiente para jogar, você só poderá passar a vez ou desistir!");
         System.out.println("\n\nBOM JOGO!\n");
+        //Espera.esperar(3);
+
+        // Deixei confirmação por ter achado melhor nessa parte, se preferir a espera está comentada acima
+        System.out.println("Tecle 'Enter' para inciar o jogo!");
+        entrada.nextLine();
+
 
         //while principal do jogo, que verifica vida etc
         while (hacker1.getVida() != 0 && hacker2.getVida() != 0){
@@ -385,12 +392,15 @@ public class GerenciadorJogo {
             if (armazenaJogador1.isEmpty()) {
                 System.out.println("Passou a vez!\n");
                 replay.add("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") passou a vez.");
+                Espera.esperar(0.5);
+
             } else {
                 for (int idx : armazenaJogador1) hacker1.imprimeCartaDeckManipulavel(idx);
                 replay.add("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") jogou:");
                 for (int idx : armazenaJogador1) {
                     CartaP carta = hacker1.getDeckManipulavel().get(idx);
                     replay.add(" - " + carta.getNome() + " (" + carta.getTipo() + ")");
+                    Espera.esperar(0.1);
                 }
             }
 
@@ -399,15 +409,44 @@ public class GerenciadorJogo {
             if (armazenaJogador2.isEmpty()) {
                 System.out.println("Passou a vez!\n");
                 replay.add("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") passou a vez.");
+                    Espera.esperar(0.5);
             } else {
                 for (int idx : armazenaJogador2) hacker2.imprimeCartaDeckManipulavel(idx);
                 replay.add("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") jogou:");
                 for (int idx : armazenaJogador2) {
                     CartaP carta = hacker2.getDeckManipulavel().get(idx);
                     replay.add(" - " + carta.getNome() + " (" + carta.getTipo() + ")");
+                    Espera.esperar(0.1);
                 }
             }
 
+<<<<<<< HEAD
+=======
+            if (armazenaJogador1.size() == 0){
+                System.out.println("Passou a vez!\n");
+                Espera.esperar(0.5);
+            }
+            else{
+                for (int i = 0; i < armazenaJogador1.size(); i++){
+                    hacker1.imprimeCartaDeckManipulavel(armazenaJogador1.get(i));
+                    Espera.esperar(0.1);
+                }
+            }
+
+            System.out.println("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") jogou:\n");
+            // imprimir mao jogada; se o jogador tiver passado a vez verificar tam do vetor == 0, e imprime "passou a vez"
+            if (armazenaJogador2.size() == 0){
+                System.out.println("Passou a vez!\n");
+                Espera.esperar(0.5)
+            }
+            else{
+                for (int i = 0; i < armazenaJogador2.size(); i++){
+                    hacker2.imprimeCartaDeckManipulavel(armazenaJogador2.get(i));
+                    Espera.esperar(0.1);
+                }
+            }
+
+>>>>>>> 8b9ea70d9b51a64d83d70d0430d24a433a9cd4b3
             System.out.println("==================================================================\n");
 
             // Consolida turno
@@ -501,6 +540,7 @@ public class GerenciadorJogo {
             System.out.println("\n\u001B[3;4mSUA MÃO ESCOLHIDA:\u001B[0m\n");
             for (int i = 0; i < armazena.size(); i++){
                 hacker.imprimeCartaDeckManipulavel(armazena.get(i));
+                Espera.esperar(0.1);
             }
             System.out.println("*----------------------------------------------------\n");
             System.out.print("Confirma Seleção? (Y/N) ");
@@ -577,14 +617,17 @@ public class GerenciadorJogo {
     public void selecionarCartas(Jogador hacker, ArrayList<CartaP> conjunto, int qtdCartas, Scanner entrada){
         System.out.println("\n\n" + "Escolha " + qtdCartas + " cartas de " + conjunto.get(0).getTipo() + " da lista!" + "\n");
         System.out.println("################################################################################################\n");
+        Espera.esperar(0.5);
             
         for (int i = 0; i < conjunto.size(); i++){
             System.out.print(i+1 + " ");
             conjunto.get(i).imprime();
             System.out.print("\n");
+            Espera.esperar(0.1);
         }
         System.out.println("#################################################################################################");
         System.out.println("\n" + "Digite o número correspondente das cartas e confirme a seleção: ");
+        Espera.esperar(0.5);
 
         int[] verificarNumCartasRept = new int[4]; // vetor para verificar possiveis repeticoes 
                 
