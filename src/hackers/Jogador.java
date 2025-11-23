@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 import data.CartaP;
+import pannel.Espera;
 
 public class Jogador{
     private String nome;
@@ -52,6 +53,7 @@ public class Jogador{
         for (int i = 0; i < deckManipulavel.size(); i++){
             System.out.println("\nCarta " + (i+1) + ": ");
             deckManipulavel.get(i).imprime();
+            Espera.esperar(0.05);
         }
     }
 

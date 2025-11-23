@@ -530,6 +530,7 @@ public class GerenciadorJogo {
             System.out.println("\n\u001B[3;4mSUA MÃO ESCOLHIDA:\u001B[0m\n");
             for (int i = 0; i < armazena.size(); i++){
                 hacker.imprimeCartaDeckManipulavel(armazena.get(i));
+                Espera.esperar(0.1);
             }
             System.out.println("*----------------------------------------------------\n");
             System.out.print("Confirma Seleção? (Y/N) ");
@@ -606,14 +607,17 @@ public class GerenciadorJogo {
     public void selecionarCartas(Jogador hacker, ArrayList<CartaP> conjunto, int qtdCartas, Scanner entrada){
         System.out.println("\n\n" + "Escolha " + qtdCartas + " cartas de " + conjunto.get(0).getTipo() + " da lista!" + "\n");
         System.out.println("################################################################################################\n");
+        Espera.esperar(0.5);
             
         for (int i = 0; i < conjunto.size(); i++){
             System.out.print(i+1 + " ");
             conjunto.get(i).imprime();
             System.out.print("\n");
+            Espera.esperar(0.1);
         }
         System.out.println("#################################################################################################");
         System.out.println("\n" + "Digite o número correspondente das cartas e confirme a seleção: ");
+        Espera.esperar(0.5);
 
         int[] verificarNumCartasRept = new int[4]; // vetor para verificar possiveis repeticoes 
                 
