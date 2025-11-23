@@ -327,6 +327,7 @@ public class GerenciadorJogo {
 
         System.out.println("\n\nComeçando o jogo...");
         int contadorTurnos = 1; // contar os turnos
+
         // Mostrando as regras
         System.out.println("\n\n\u001B[3;4mINFORMAÇÕES:\u001B[0m "); 
         System.out.println("\n1: Você tem 100 pontos de vida e 10 pontos de energia no início do jogo! Se sua vida zerar, você perde!");
@@ -337,10 +338,15 @@ public class GerenciadorJogo {
         System.out.println("\n6: Se não tiver energia suficiente para jogar, você só poderá passar a vez ou desistir!");
         System.out.println("\n\nBOM JOGO!\n");
 
-        // while (verificar vida)
+        //while principal do jogo, que verifica vida etc
         while (hacker1.getVida() != 0 && hacker2.getVida() != 0){
+
             ArrayList<Integer> armazenaJogador1 = new ArrayList<>(); // vetor que armazena selecao das cartas da mao jogada JOGADOR 1
             ArrayList<Integer> armazenaJogador2 = new ArrayList<>(); // vetor que armazena selecao das cartas da mao jogada JOGADOR 2
+
+            // Limpar no início do turno
+            armazenaJogador1.clear();
+            armazenaJogador2.clear();
 
             replay.add("\n======================================");
             replay.add("TURNO " + contadorTurnos + "\n");
@@ -355,70 +361,32 @@ public class GerenciadorJogo {
             hacker1.reinicioTurnoPontosAtqDef();
             hacker2.reinicioTurnoPontosAtqDef();
 
-            if (contadorTurnos % 2 == 0){
-                // mensagem de inicio de turno + impressao deck pro jogador pensar se joga ou nao JOGADOR 2
-                System.out.println("\n##################################################################"); // separador vez 
-                System.out.println("\n=> SUA VEZ, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
-                hacker2.imprimirCartasDeck();
+            // Turno jogador 1
+            System.out.println("\n=> SUA VEZ, " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")!");
+            if(!hacker1.getNome().equals("BOT")) hacker1.imprimirCartasDeck();
+            int opcaoJogarPassarDesistir1 = hacker1.getNome().equals("BOT") ? 0 : verificaDesistencia(hacker1, entrada);
+            turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada, replay);
 
-                // verifica desistencia jogador 2
-                int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
+            // Turno jogador 2
+            System.out.println("\n------------------------------------------------------------------"); // separador vez
+            System.out.println("\n=> SUA VEZ, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
+            if(!hacker2.getNome().equals("BOT")) hacker2.imprimirCartasDeck();
+            int opcaoJogarPassarDesistir2 = hacker2.getNome().equals("BOT") ? 0 : verificaDesistencia(hacker2, entrada);
+            if(hacker2.getNome().equals("BOT")) turnoBOT(hacker2, armazenaJogador2, replay, contadorTurnos);
+            else turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada, replay);
 
-                turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada, replay);
-                if (opcaoJogarPassarDesistir2 == 2){
-                    break;
-                }
-
-                // mensagem de inicio de turno + impressao deck pro jogador pensar se joga ou nao JOGADOR 1
-                System.out.println("\n------------------------------------------------------------------"); // separador vez 
-                System.out.println("\n=> SUA VEZ, " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")!");
-                hacker1.imprimirCartasDeck();
-
-                // verifica desistencia jogador 1
-                int opcaoJogarPassarDesistir1 = verificaDesistencia(hacker1, entrada);
-                turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada, replay);
-                if (opcaoJogarPassarDesistir1 == 2){
-                    break;
-                }
-            }
-            else{
-                // mensagem de inicio de turno + impressao deck pro jogador pensar se joga ou nao JOGADOR 1
-                System.out.println("\n##################################################################"); // separador vez 
-                System.out.println("\n=> SUA VEZ, " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")!");
-                hacker1.imprimirCartasDeck();
-
-                // verifica desistencia jogador 1
-                int opcaoJogarPassarDesistir1 = verificaDesistencia(hacker1, entrada);
-                turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada, replay);
-                if (opcaoJogarPassarDesistir1 == 2){
-                    break;
-                }
-
-                // mensagem de inicio de turno + impressao deck pro jogador pensar se joga ou nao JOGADOR 2
-                System.out.println("\n------------------------------------------------------------------"); // separador vez 
-                System.out.println("\n=> SUA VEZ, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
-                hacker2.imprimirCartasDeck();
-
-                if(hacker2.getNome().equals("BOT")){
-                    turnoBOT(hacker2, armazenaJogador2, replay, contadorTurnos);
-                }else{
-                    int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
-                    if (opcaoJogarPassarDesistir2 == 2){
-                        break;
-                    }
-                    turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada, replay);
-                }
-            }
-
-            // display cartas "Painel Turno ... " ================ (colocar em cima e em baixo)
-            System.out.println("\n\nPAINEL DO TURNO " + contadorTurnos + ":" + "\n=================================================================="); // separador painel
-            System.out.println("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") jogou:\n");
-            // imprimir mao jogada; se o jogador tiver passado a vez verificar tam do vetor == 0, e imprime "passou a vez"
             
+            // PAINEL do turno - depois que ambos jogaram
+            System.out.println("\n\nPAINEL DO TURNO " + contadorTurnos + ":\n==================================================================");
+
+
             // JOGADOR 1
-            if (armazenaJogador1.size() == 0) {
+            System.out.println("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") jogou:\n");
+            if (armazenaJogador1.isEmpty()) {
+                System.out.println("Passou a vez!\n");
                 replay.add("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") passou a vez.");
             } else {
+                for (int idx : armazenaJogador1) hacker1.imprimeCartaDeckManipulavel(idx);
                 replay.add("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") jogou:");
                 for (int idx : armazenaJogador1) {
                     CartaP carta = hacker1.getDeckManipulavel().get(idx);
@@ -427,9 +395,12 @@ public class GerenciadorJogo {
             }
 
             // JOGADOR 2
-            if (armazenaJogador2.size() == 0) {
+            System.out.println("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") jogou:\n");
+            if (armazenaJogador2.isEmpty()) {
+                System.out.println("Passou a vez!\n");
                 replay.add("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") passou a vez.");
             } else {
+                for (int idx : armazenaJogador2) hacker2.imprimeCartaDeckManipulavel(idx);
                 replay.add("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") jogou:");
                 for (int idx : armazenaJogador2) {
                     CartaP carta = hacker2.getDeckManipulavel().get(idx);
@@ -437,107 +408,64 @@ public class GerenciadorJogo {
                 }
             }
 
-            if (armazenaJogador1.size() == 0){
-                System.out.println("Passou a vez!\n");
-            }
-            else{
-                for (int i = 0; i < armazenaJogador1.size(); i++){
-                    hacker1.imprimeCartaDeckManipulavel(armazenaJogador1.get(i));
-                }
-            }
-
-            System.out.println("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") jogou:\n");
-            // imprimir mao jogada; se o jogador tiver passado a vez verificar tam do vetor == 0, e imprime "passou a vez"
-            if (armazenaJogador2.size() == 0){
-                System.out.println("Passou a vez!\n");
-            }
-            else{
-                for (int i = 0; i < armazenaJogador2.size(); i++){
-                    hacker2.imprimeCartaDeckManipulavel(armazenaJogador2.get(i));
-                }
-            }
-
             System.out.println("==================================================================\n");
 
-            // IMPLEMENTAR PONTOS DE ATAQUE, DEFESA E SUPORTE
+            // Consolida turno
             consolidaTurno(hacker1, hacker2, armazenaJogador1, armazenaJogador2);
 
             replay.add("\nApós consolidação:");
             replay.add("Vida P1: " + hacker1.getVida() + " | Energia P1: " + hacker1.getEnergia());
             replay.add("Vida P2: " + hacker2.getVida() + " | Energia P2: " + hacker2.getEnergia());
 
+            // Mostrar vida e energia
+            System.out.println("\nDADOS " + hacker1.getNome() + "(" + hacker1.getMatricula() + "):\n" + "Vida: " + hacker1.getVida() + " | Energia: " + hacker1.getEnergia() + "\n");
+            System.out.println("\nDADOS " + hacker2.getNome() + "(" + hacker2.getMatricula() + "):\n" + "Vida: " + hacker2.getVida() + " | Energia: " + hacker2.getEnergia() + "\n");
 
-            // mostrar pontos de vida e energia 
-            System.out.println("\nDADOS " + hacker1.getNome() + "(" + hacker1.getMatricula() + "):\n\n" + "Vida: " + hacker1.getVida() + " | Energia: " + hacker1.getEnergia() + "\n");
-            System.out.println("\nDADOS " + hacker2.getNome() + "(" + hacker2.getMatricula() + "):\n\n" + "Vida: " + hacker2.getVida() + " | Energia: " + hacker2.getEnergia() + "\n");
-            
-            // deletar as cartas correspondentes ao vetor
+            // Deletar cartas jogadas
             hacker1.deletaCartasDeckManipulavel(armazenaJogador1);
             hacker2.deletaCartasDeckManipulavel(armazenaJogador2);
-            
-            // verificar se o deck esta vazio, se estiver, preenche-lo com o deck salvo no jogador
-            if (hacker1.deckManipulavelEhVazio()){
-                hacker1.preencherDeckManipulavel();
-            }
 
-            if (hacker2.deckManipulavelEhVazio()){
-                hacker2.preencherDeckManipulavel();
-            }
-            
-            // adicionar 1 de energia
+            // Reabastecer deck se estiver vazio
+            if (hacker1.deckManipulavelEhVazio()) hacker1.preencherDeckManipulavel();
+            if (hacker2.deckManipulavelEhVazio()) hacker2.preencherDeckManipulavel();
+
+            // Aumentar energia
             hacker1.aumentaEnergia();
             hacker2.aumentaEnergia();
 
-            // muda o turno
+            // Mudar turno
             contadorTurnos++;
         }
-        // imprime vencedor com base em quem ficou com zero 
+
+        // FIM DO JOGO 
+
         if (hacker1.getVida() == 0 && hacker2.getVida() != 0){
-            // imprimir hacker2 ganhou
             System.out.println("\n*---------------------------------------------------*");
-            System.out.println("\n" + hacker2.getNome() + "(" + hacker2.getMatricula() + ") VENCEU!");
+            System.out.println("\n" + hacker2.getNome() + " VENCEU!");
             System.out.println("\n*---------------------------------------------------*");
-            replay.add("\nVENCEDOR: " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")");
-
-        }
-        else if (hacker1.getVida() != 0 && hacker2.getVida() == 0){
-            // imprimir hacker1 ganhou
+            replay.add("\nVENCEDOR: " + hacker2.getNome());
+        }else if (hacker1.getVida() != 0 && hacker2.getVida() == 0){
             System.out.println("\n*---------------------------------------------------*");
-            System.out.println("\n" + hacker1.getNome() + "(" + hacker1.getMatricula() + ") VENCEU!");
+            System.out.println("\n" + hacker1.getNome() + " VENCEU!");
             System.out.println("\n*---------------------------------------------------*");
-            replay.add("\nVENCEDOR: " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")");
-
-        }
-        else{
-            // imprimir empate
+            replay.add("\nVENCEDOR: " + hacker1.getNome());
+        }else{
             System.out.println("\n*---------------------------------------------------*");
             System.out.println("\nOs jogadores EMPATARAM!");
             System.out.println("\n*---------------------------------------------------*");
             replay.add("\nO jogo terminou EMPATADO.");
-
         }
 
         // OPÇÃO REPLAY
         String respReplay;
-
         while (true) {
             System.out.print("\n=> Deseja salvar o replay? (Y/N): ");
             respReplay = entrada.nextLine().trim().toLowerCase();
-
-            // validação simples
-            if (respReplay.equals("y") || respReplay.equals("n")) {
-                break;
-            } else {
-                System.out.println("Opção Inválida! Digite apenas Y ou N.");
-            }
+            if (respReplay.equals("y") || respReplay.equals("n")) break;
+            else System.out.println("Opção Inválida! Digite apenas Y ou N.");
         }
-
-        if (respReplay.equals("y")) {
-            replay.salvar("replay.txt");
-        }
-
+        if (respReplay.equals("y")) replay.salvar("replay.txt");
     }
-
 
     // Método Turno Jogador 
     public void turnoJogador(Jogador hacker, ArrayList<Integer> armazena, int opcaoJogarPassarDesistir, Scanner entrada, Replay replay){
