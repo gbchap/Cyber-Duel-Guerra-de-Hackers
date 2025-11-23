@@ -296,6 +296,7 @@ public class GerenciadorJogo {
         System.out.println("\n\nBOM JOGO!\n");
         //Espera.esperar(3);
 
+        // Deixei confirmação por ter achado melhor nessa parte, se preferir a espera está comentada acima
         System.out.println("Tecle 'Enter' para inciar o jogo!");
         entrada.nextLine();
 
