@@ -11,16 +11,19 @@ public class GerenciadorJogo {
     public GerenciadorJogo(){}
 
     // Método Turnos PLAYER x BOT; 
-    public void turnoBOT(Jogador bot, ArrayList<Integer> armazenaJogador2, Replay replay){ //bot será hacker2
+    public void turnoBOT(Jogador bot, ArrayList<Integer> armazenaJogador2, Replay replay, int contadorTurnos){ //bot será hacker2
         
         //atualiza deck manipulavel
         bot.preencherDeckManipulavel();
         int energia = bot.getEnergia();
 
-        //processo que procura a carta de ataque e de defesa de menor custo
+        //processo que procura a carta de ataque, suporte ee defesa de menor custo
 
         Integer idxMelhorAtq = null;
         Integer idxMelhorDef = null;
+        Integer idxMelhorSupAumAtq = null;
+        Integer idxMelhorSupDimAtq = null;
+        Integer idxMelhorSupAumVida = null;
 
         for(int i=0; i < bot.deckManipulavelsize(); i++){
             CartaP c = bot.getDeckManipulavel().get(i);
@@ -32,40 +35,80 @@ public class GerenciadorJogo {
                 if(idxMelhorDef == null || c.getCusto() < bot.getDeckManipulavel().get(idxMelhorDef).getCusto()){
                     idxMelhorDef = i;
                 }
+            }else if(c.getTipo().equals("SUPORTE")){
+                switch(c.getEfeito()) {
+                    case "AUMENTA_ATAQUE":
+                        if (idxMelhorSupAumAtq == null || c.getCusto() < bot.getDeckManipulavel().get(idxMelhorSupAumAtq).getCusto())
+                            idxMelhorSupAumAtq = i;
+                        break;
+                    case "DIMINUI_ATAQUE":
+                        if (idxMelhorSupDimAtq == null || c.getCusto() < bot.getDeckManipulavel().get(idxMelhorSupDimAtq).getCusto())
+                        idxMelhorSupDimAtq = i;
+                    break;
+                    case "AUMENTA_VIDA":
+                        if (idxMelhorSupAumVida == null || c.getCusto() < bot.getDeckManipulavel().get(idxMelhorSupAumVida).getCusto())
+                        idxMelhorSupAumVida = i;
+                    break;
+                }
             }
         }
 
         ArrayList<Integer> escolhas = new ArrayList<>();
 
-        // se a vida do bot estiver baixa, prioriza defesa; caso contrário, prioriza ataque.
-        boolean priorizaDefesa = bot.getVida() <= 30.0;
+        boolean vidaBaixaRapido = bot.getVida() <= 30.0 && (contadorTurnos <= 2); //usar defesa e suporte DIMINUI_ATAQUE/AUMENTA_VIDA
+        boolean vidaBaixa = bot.getVida() <= 40.0 && (contadorTurnos > 2);  // se 1, prioriza defesa; se 0, prioriza ataque e suporte AUMENTA_ATAQUE
 
-        if(priorizaDefesa){
-            if(idxMelhorDef != null && bot.custoCartaDeckManipulavel(idxMelhorDef) <= energia){
+        if(vidaBaixaRapido){ 
+            if (idxMelhorDef != null && bot.custoCartaDeckManipulavel(idxMelhorDef) < energia){
                 escolhas.add(idxMelhorDef);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorDef);
+            }
+            if (idxMelhorSupDimAtq != null && bot.custoCartaDeckManipulavel(idxMelhorSupDimAtq) <= energia){
+                escolhas.add(idxMelhorSupDimAtq);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorSupDimAtq);
+            }
+            if(idxMelhorSupAumVida != null && bot.custoCartaDeckManipulavel(idxMelhorSupAumVida) <= energia){
+                escolhas.add(idxMelhorSupAumVida);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorSupAumVida);
+            }
+
+        }else if(vidaBaixa){
+        // prioridade: ATAQUE + SUPORTE AUMENTA_ATAQUE
+            if (idxMelhorAtq != null && bot.custoCartaDeckManipulavel(idxMelhorAtq) <= energia) {
+                escolhas.add(idxMelhorAtq);
                 energia -= bot.custoCartaDeckManipulavel(idxMelhorAtq);
             }
-            if (idxMelhorAtq != null && bot.custoCartaDeckManipulavel(idxMelhorAtq) <= energia){
-                if(!escolhas.contains(idxMelhorAtq)){
-                    escolhas.add(idxMelhorAtq);
-                    energia -= bot.custoCartaDeckManipulavel(idxMelhorAtq);
-                }
+            if (idxMelhorSupAumAtq != null && bot.custoCartaDeckManipulavel(idxMelhorSupAumAtq) <= energia) {
+                escolhas.add(idxMelhorSupAumAtq);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorSupAumAtq);
+            }
+            if (idxMelhorDef != null && bot.custoCartaDeckManipulavel(idxMelhorDef) <= energia && escolhas.size() < 3) {
+                escolhas.add(idxMelhorDef);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorDef);
             }
         }else{
-            if (idxMelhorAtq != null && bot.custoCartaDeckManipulavel(idxMelhorAtq) <= energia){
-            escolhas.add(idxMelhorAtq);
-            energia -= bot.custoCartaDeckManipulavel(idxMelhorAtq);
+        // situação normal: ataque + defesa + SUPORTE aleatório ou útil
+            if (idxMelhorAtq != null && bot.custoCartaDeckManipulavel(idxMelhorAtq) <= energia) {
+                escolhas.add(idxMelhorAtq);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorAtq);
             }
-            if (idxMelhorDef != null && bot.custoCartaDeckManipulavel(idxMelhorDef) <= energia){
-                if (!escolhas.contains(idxMelhorDef)){
-                    escolhas.add(idxMelhorDef);
-                    energia -= bot.custoCartaDeckManipulavel(idxMelhorDef);
-                }
+            if (idxMelhorDef != null && bot.custoCartaDeckManipulavel(idxMelhorDef) <= energia && escolhas.size() < 3) {
+                escolhas.add(idxMelhorDef);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorDef);
+            }
+            if (idxMelhorSupAumAtq != null && bot.custoCartaDeckManipulavel(idxMelhorSupAumAtq) <= energia && escolhas.size() < 3) {
+                escolhas.add(idxMelhorSupAumAtq);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorSupAumAtq);
+            }
+            if (idxMelhorSupDimAtq != null && bot.custoCartaDeckManipulavel(idxMelhorSupDimAtq) <= energia && escolhas.size() < 3) {
+                escolhas.add(idxMelhorSupDimAtq);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorSupDimAtq);
+            }
+            if (idxMelhorSupAumVida != null && bot.custoCartaDeckManipulavel(idxMelhorSupAumVida) <= energia && escolhas.size() < 3) {
+                escolhas.add(idxMelhorSupAumVida);
+                energia -= bot.custoCartaDeckManipulavel(idxMelhorSupAumVida);
             }
         }
-
-        // bot vai tentar escolher máx 2 cartas/vez.
-        // (escolhas terá no máximo 2 índices: 1 defesa + 1 ataque).
 
         if (escolhas.isEmpty()){
             System.out.println("BOT não conseguiu escolher cartas por falta de energia ou cartas válidas. Passa a vez.");
@@ -93,7 +136,7 @@ public class GerenciadorJogo {
             bot.imprimeCartaDeckManipulavel(idx);
         }
     }
-    
+
 
     // Método faz a atualizacao dos pontos de defesa e ataque do jogador, analisando o suporte
     public double atualizacaoPontos (Jogador hacker, ArrayList<Integer> armazena, double diminuicaoAtaque, double aumentoMaiorAtaque,
@@ -357,7 +400,7 @@ public class GerenciadorJogo {
                 hacker2.imprimirCartasDeck();
 
                 if(hacker2.getNome().equals("BOT")){
-                    turnoBOT(hacker2, armazenaJogador2, replay);
+                    turnoBOT(hacker2, armazenaJogador2, replay, contadorTurnos);
                 }else{
                     int opcaoJogarPassarDesistir2 = verificaDesistencia(hacker2, entrada);
                     if (opcaoJogarPassarDesistir2 == 2){
