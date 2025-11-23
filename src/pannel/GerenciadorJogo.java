@@ -325,6 +325,7 @@ public class GerenciadorJogo {
             replay.add(c.getNome() + " | Tipo: " + c.getTipo() + " | Poder: " + c.getPoder() + " | Custo: " + c.getCusto());
         }
 
+        Espera.esperar(1);
         System.out.println("\n\nComeçando o jogo...");
         int contadorTurnos = 1; // contar os turnos
 
@@ -391,6 +392,7 @@ public class GerenciadorJogo {
                 for (int idx : armazenaJogador1) {
                     CartaP carta = hacker1.getDeckManipulavel().get(idx);
                     replay.add(" - " + carta.getNome() + " (" + carta.getTipo() + ")");
+                    Espera.esperar(0.1);
                 }
             }
 
@@ -405,6 +407,7 @@ public class GerenciadorJogo {
                 for (int idx : armazenaJogador2) {
                     CartaP carta = hacker2.getDeckManipulavel().get(idx);
                     replay.add(" - " + carta.getNome() + " (" + carta.getTipo() + ")");
+                    Espera.esperar(0.1);
                 }
             }
 
@@ -474,10 +477,13 @@ public class GerenciadorJogo {
         if (opcaoJogarPassarDesistir == 2){
             System.out.println("\n" + hacker.getNome() + "(" + hacker.getMatricula() + ") DESISTIU!");
             replay.add("\n" + hacker.getNome() + "(" + hacker.getMatricula() + ") desistiu!");
+            Espera.esperar(0.5);
             hacker.zeraVida();
         }
         else if (opcaoJogarPassarDesistir == 1){
             System.out.println("\n" + hacker.getNome() + "(" + hacker.getMatricula() + ") PASSOU A VEZ!");
+            Espera.esperar(0.5);
+
         }
         else{
             selecaoMaoJogador(hacker, armazena, entrada);
