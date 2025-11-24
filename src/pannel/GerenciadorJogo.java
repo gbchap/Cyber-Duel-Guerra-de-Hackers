@@ -307,7 +307,7 @@ public class GerenciadorJogo {
         }
     }
 
-   // Método de Turnos 
+    // Método de Turnos 
     public void turnosPVP(Jogador hacker1, Jogador hacker2, ArrayList<CartaP> conjunto1, ArrayList<CartaP> conjunto2, 
         ArrayList<CartaP> conjunto3, int qtdAtqDef, int qtdSup, Scanner entrada){ 
 
@@ -365,21 +365,44 @@ public class GerenciadorJogo {
             hacker1.reinicioTurnoPontosAtqDef();
             hacker2.reinicioTurnoPontosAtqDef();
 
-            // Turno jogador 1
-            System.out.println("\n=> SUA VEZ, " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")!");
-            if(!hacker1.getNome().equals("BOT")) hacker1.imprimirCartasDeck();
-            int opcaoJogarPassarDesistir1 = hacker1.getNome().equals("BOT") ? 0 : verificaDesistencia(hacker1, entrada);
-            turnoJogador(hacker1, armazenaJogador1, opcaoJogarPassarDesistir1, entrada, replay);
+            if (contadorTurnos % 2 != 0) {
 
-            // Turno jogador 2
-            System.out.println("\n------------------------------------------------------------------"); // separador vez
-            System.out.println("\n=> SUA VEZ, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
-            if(!hacker2.getNome().equals("BOT")) hacker2.imprimirCartasDeck();
-            int opcaoJogarPassarDesistir2 = hacker2.getNome().equals("BOT") ? 0 : verificaDesistencia(hacker2, entrada);
-            if(hacker2.getNome().equals("BOT")) turnoBOT(hacker2, armazenaJogador2, replay, contadorTurnos);
-            else turnoJogador(hacker2, armazenaJogador2, opcaoJogarPassarDesistir2, entrada, replay);
+                // TURNOS ÍMPARES → P1 COMEÇA
 
-            
+                // --- Turno jogador 1 ---
+                System.out.println("\n=> SUA VEZ, " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")!");
+                if(!hacker1.getNome().equals("BOT")) hacker1.imprimirCartasDeck();
+                int opcao1 = hacker1.getNome().equals("BOT") ? 0 : verificaDesistencia(hacker1, entrada);
+                if(hacker1.getNome().equals("BOT")) turnoBOT(hacker1, armazenaJogador1, replay, contadorTurnos);
+                else turnoJogador(hacker1, armazenaJogador1, opcao1, entrada, replay);
+
+                // --- Turno jogador 2 ---
+                System.out.println("\n------------------------------------------------------------------");
+                System.out.println("\n=> SUA VEZ, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
+                if(!hacker2.getNome().equals("BOT")) hacker2.imprimirCartasDeck();
+                int opcao2 = hacker2.getNome().equals("BOT") ? 0 : verificaDesistencia(hacker2, entrada);
+                if(hacker2.getNome().equals("BOT")) turnoBOT(hacker2, armazenaJogador2, replay, contadorTurnos);
+                else turnoJogador(hacker2, armazenaJogador2, opcao2, entrada, replay);
+
+            } else {
+                // TURNOS PARES → P2 COMEÇA
+
+                // --- Turno jogador 2 ---
+                System.out.println("\n=> SUA VEZ, " + hacker2.getNome() + "(" + hacker2.getMatricula() + ")!");
+                if(!hacker2.getNome().equals("BOT")) hacker2.imprimirCartasDeck();
+                int opcao2 = hacker2.getNome().equals("BOT") ? 0 : verificaDesistencia(hacker2, entrada);
+                if(hacker2.getNome().equals("BOT")) turnoBOT(hacker2, armazenaJogador2, replay, contadorTurnos);
+                else turnoJogador(hacker2, armazenaJogador2, opcao2, entrada, replay);
+
+                // --- Turno jogador 1 ---
+                System.out.println("\n------------------------------------------------------------------");
+                System.out.println("\n=> SUA VEZ, " + hacker1.getNome() + "(" + hacker1.getMatricula() + ")!");
+                if(!hacker1.getNome().equals("BOT")) hacker1.imprimirCartasDeck();
+                int opcao1 = hacker1.getNome().equals("BOT") ? 0 : verificaDesistencia(hacker1, entrada);
+                if(hacker1.getNome().equals("BOT")) turnoBOT(hacker1, armazenaJogador1, replay, contadorTurnos);
+                else turnoJogador(hacker1, armazenaJogador1, opcao1, entrada, replay);
+            }
+
             // PAINEL do turno - depois que ambos jogaram
             System.out.println("\n\nPAINEL DO TURNO " + contadorTurnos + ":\n==================================================================");
 
