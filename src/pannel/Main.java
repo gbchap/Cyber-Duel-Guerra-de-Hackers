@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args){
 
         //CARREGAR CARTAS DO CSV
-        System.out.println("Carregando banco de cartas...");
+        System.out.println("\nCarregando banco de cartas...");
 
         ArrayList<CartaP> ataques =
             LeitorCSV.lerAtaqueEdefesa("src/data/ataque.csv");
