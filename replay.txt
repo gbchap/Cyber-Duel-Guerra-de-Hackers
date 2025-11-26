@@ -7,20 +7,20 @@ Criptografia Quântica | Tipo: DEFESA | Poder: 50.0 | Custo: 5
 Escudo Quântico | Tipo: DEFESA | Poder: 50.0 | Custo: 5
 IA de Defesa Adaptativa | Tipo: DEFESA | Poder: 50.0 | Custo: 5
 Fortaleza de Hardware | Tipo: DEFESA | Poder: 50.0 | Custo: 5
-Atualização de Firmware | Tipo: SUPORTE | Poder: 0.2 | Custo: 2
-Overclock de CPU | Tipo: SUPORTE | Poder: 0.2 | Custo: 2
+Atualização de Firmware | Tipo: SUPORTE | Poder: 0.2 | Custo: 2 | Efeito: AUMENTA_ATAQUE
+Overclock de CPU | Tipo: SUPORTE | Poder: 0.2 | Custo: 2 | Efeito: AUMENTA_ATAQUE
 
 === DECK INICIAL DO JOGADOR 2 ===
-Comprometimento de Firmware | Tipo: ATAQUE | Poder: 50.0 | Custo: 5
-SQL Injection Avancado | Tipo: ATAQUE | Poder: 30.0 | Custo: 3
-Roteamento Malicioso | Tipo: ATAQUE | Poder: 10.0 | Custo: 1
-Ping de Teste | Tipo: ATAQUE | Poder: 10.0 | Custo: 1
-Proteção de Núcleo | Tipo: DEFESA | Poder: 50.0 | Custo: 5
-Sistema de Backup Incremental | Tipo: DEFESA | Poder: 30.0 | Custo: 3
-Quarentena de Arquivo | Tipo: DEFESA | Poder: 10.0 | Custo: 1
-Proteção de Porta | Tipo: DEFESA | Poder: 10.0 | Custo: 1
-Bloqueio Dinâmico | Tipo: SUPORTE | Poder: 0.3 | Custo: 3
-Otimizador de Scripts | Tipo: SUPORTE | Poder: 0.1 | Custo: 1
+DNS Spoofing | Tipo: ATAQUE | Poder: 20.0 | Custo: 2
+Ataque Quântico | Tipo: ATAQUE | Poder: 50.0 | Custo: 5
+Spoofing de Identidade | Tipo: ATAQUE | Poder: 20.0 | Custo: 2
+ARP Flood | Tipo: ATAQUE | Poder: 20.0 | Custo: 2
+Barreira de Contenção | Tipo: DEFESA | Poder: 50.0 | Custo: 5
+IA de Defesa Adaptativa | Tipo: DEFESA | Poder: 50.0 | Custo: 5
+Filtro de Entrada de Dados | Tipo: DEFESA | Poder: 20.0 | Custo: 2
+Proteção de Senhas | Tipo: DEFESA | Poder: 20.0 | Custo: 2
+Exploração Otimizada | Tipo: SUPORTE | Poder: 0.1 | Custo: 1 | Efeito: AUMENTA_ATAQUE
+Potencializador de Exploit | Tipo: SUPORTE | Poder: 0.2 | Custo: 2 | Efeito: AUMENTA_ATAQUE
 
 ======================================
 TURNO 1
@@ -28,6 +28,46 @@ TURNO 1
 Vida P1: 100.0 | Energia P1: 10
 Vida P2: 100.0 | Energia P2: 10
 
-r(3) desistiu!
+b(3) jogou:
+ - Atualização de Firmware (SUPORTE)
 
-VENCEDOR: t(4)
+t(4) jogou:
+ - DNS Spoofing (ATAQUE)
+ - Ataque Quântico (ATAQUE)
+
+Após consolidação:
+Vida P1: 30.0 | Energia P1: 8
+Vida P2: 100.0 | Energia P2: 3
+
+======================================
+TURNO 2
+
+Vida P1: 30.0 | Energia P1: 9
+Vida P2: 100.0 | Energia P2: 4
+
+b(3) passou a vez.
+
+t(4) passou a vez.
+
+Após consolidação:
+Vida P1: 30.0 | Energia P1: 9
+Vida P2: 100.0 | Energia P2: 4
+
+======================================
+TURNO 3
+
+Vida P1: 30.0 | Energia P1: 10
+Vida P2: 100.0 | Energia P2: 5
+
+b(3) jogou:
+ - Exploit Zero-Day (ATAQUE)
+ - Ransomware Avançado (ATAQUE)
+
+t(4) jogou:
+ - Spoofing de Identidade (ATAQUE)
+
+Após consolidação:
+Vida P1: 10.0 | Energia P1: 0
+Vida P2: 0.0 | Energia P2: 3
+
+VENCEDOR: b(3)
